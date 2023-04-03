@@ -49,9 +49,10 @@ void Lexer::tokenize(string str) {
 cout << "help.. code.." << endl;
     // implement tokenization using regex, rather than iteration:
     for(int i = 0; i < Lexer::tokenRegex.size(); i++) {
-        cout << "help.. code.." << endl;
+        cout << i << endl;
+        // o u c h
         if(regex_search(str, regex(Lexer::tokenRegex[i][1]))) {
-            cout << "a, regex, passed" << endl;
+            cout << "a, regex, passed.." << endl;
         }
     }
 }

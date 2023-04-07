@@ -1,24 +1,21 @@
-#include <iostream>
-#include <vector>
 #include <string>
-#include <fstream>
+#include <vector>
 
 using namespace std;
 
-class Lexer
-{
-    public:
-    string _string;
-    vector<vector<string>> _tokens;
-    int _cursor = 0;
-    vector<vector<string>> tokenRegex;
+class Lexer {
+public:
+  string _string;
+  vector<vector<string>> _tokens;
+  int _cursor = 0;
+  vector<vector<string>> tokenRegex;
 
-    Lexer(string filename);
-    // ~Lexer();
+  Lexer(string filename);
+  // ~Lexer();
 
-    void printTokens();
+  void printTokens();
 
-    void tokenize(string str);
+  void tokenize();
 
-    bool advance();
+  bool advance();
 };

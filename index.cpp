@@ -1,21 +1,37 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
 #include <regex>
+#include <string>
+#include <vector>
+
 #include "lexer.h"
+#include "parser.h"
 
 using namespace std;
 
-int main()
-{
-    Lexer lexer("test.lang");
-    lexer.tokenize(lexer._string);
-    lexer.printTokens();
+// why is regex is c++ such a pain? :sob:
+// in*
+// its not that bad*
 
-    // why is regex is c++ such a pain? :sob:
-    bool const reg = regex_search(" hello e", regex("/^\\s+/"));
-    cout << reg << endl;
+int main() {
 
-    return 0;
+  Lexer lexer("test.lang");
+  regex regexp(lexer.tokenRegex[3][1]);
+
+  cout << "In: " << lexer._string << endl;
+  cout << "Lexer: " << endl << endl;
+
+  // lol 1/8th of the way there.. :gun: :me:
+  lexer.tokenize();
+  cout << lexer._tokens.size() << endl;
+  lexer.printTokens();
+
+  cout << "Parser: " << endl << endl;
+
+  Parser parser(lexer._tokens);
+  parser.parse();
+  parser.printAST();
+
+  cout << "Out: " << endl << endl;
+
+  return 0;
 }

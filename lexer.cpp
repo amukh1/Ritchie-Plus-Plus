@@ -76,7 +76,7 @@ vector<vector<string>> regtok = {
     {"MCOMMENT", "^\\/\\*[\\s\\S]*?\\*\\/"}, // 24
 };
 
-// fck c++, why does it take 9 lines for a strcpy??? :middle_finger:
+// screw c++, why does it take 9 lines for a strcpy??? :m_finger:
 // ^ L
 
 Lexer::Lexer(string filename) {

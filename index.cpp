@@ -5,6 +5,7 @@
 
 #include "lexer.h"
 #include "parser.h"
+#include "AST.h"
 
 using namespace std;
 
@@ -23,13 +24,17 @@ int main() {
   // lol 1/8th of the way there.. :gun: :me:
   lexer.tokenize();
   cout << lexer._tokens.size() << endl;
-  lexer.printTokens();
+  // lexer.printTokens();
 
   cout << "Parser: " << endl << endl;
 
   Parser parser(lexer._tokens);
+  cout << "parse started" << endl;
   parser.parse();
-  parser.printAST();
+  cout << "parsing done" << endl;
+  // parser.printAST();
+  // parser.out("out.ast");
+  // cout << ((FDECL*)(parser._ast[0]))->_data2.size() << endl;
 
   cout << "Out: " << endl << endl;
 

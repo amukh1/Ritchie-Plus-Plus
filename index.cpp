@@ -29,9 +29,10 @@ int main() {
   cout << "Parser: " << endl << endl;
 
   Parser parser(lexer._tokens);
-  cout << "parse started" << endl;
+  // cout << "parse started" << endl;
   parser.parse();
-  cout << "parsing done" << endl;
+  // cout << "parsing done" << endl;
+  // cout << (*(FDECL*)(parser._ast[0]))._data2[0]->_type << endl;
   // parser.printAST();
   // parser.out("out.ast");
   // cout << ((FDECL*)(parser._ast[0]))->_data2.size() << endl;

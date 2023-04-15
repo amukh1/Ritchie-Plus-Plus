@@ -11,7 +11,7 @@ class Parser {
 public:
   vector<vector<string>> _tokens;
   int _cursor = 0;
-  vector<Node*> _ast;
+  vector<AbstractNode> _ast;
 
 
   Parser(vector<vector<string>> tokens);

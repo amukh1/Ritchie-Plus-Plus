@@ -4,26 +4,30 @@
 
 using namespace std;
 
-union NodeTypes
-{
-  LITERAL LIT;
-  FDECL FD;
-  FCALL FC;
-  bool NUL;
-};
+// union NodeTypes
+// {
+//   LITERAL LIT;
+//   FDECL FD;
+//   FCALL FC;
+//   bool NUL;
+//   NodeTypes() = default;
+//   ~NodeTypes() = default;
+// };
 
-struct AbstractNode
-{
-  NodeTypes node;
-  string type;
-  AbstractNode()
-  {
-    node.NUL = true;
-    type = "empty";
-    // initialize union with empty node
-    // initialize stored node type string with "empty"
-  }
-};
+// struct AbstractNode
+// {
+//   NodeTypes node;
+//   string type;
+//   AbstractNode()
+//   {
+//     node.NUL = true;
+//     type = "empty";
+//     // initialize union with empty node
+//     // initialize stored node type string with "empty"
+//   }
+// };
+
+class AbstractNode;
 
 class Node {
 public:
@@ -77,3 +81,12 @@ public:
 //   ExprClosed(string type, string value, vector<Node> data);
 //   // ~ExprClose();
 // };
+
+class AbstractNode {
+public:
+  string _type;
+  FDECL _FD;
+  FCALL _FC;
+  LITERAL _LIT;
+  AbstractNode() = default;
+};

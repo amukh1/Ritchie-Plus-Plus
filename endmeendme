@@ -1,0 +1,63 @@
+void Parser::printAST() {
+  for (int i = 0; i < _ast.size(); i++) {
+    // cout << type << endl;
+    cout << _ast[i]._type << " " << _ast[i] << "; data{" << to_string(data.size()) << "}";
+    if(type == "FDECL") {
+      cout << ((FDECL*)(&ast))->_data2.size() << endl;
+      // cout << "; data2{" << to_string((*((FDECL*)(sast)))._data2.size()) << "}";
+    }else cout << type;
+    cout << endl;
+  }
+}
+
+void Parser::out(string filename) {
+  // write ast into a json-tree like form in output file. (INCLUDING THE AST INSIDE DATA AND DATA2)
+
+  ofstream file;
+  file.open(filename);
+  file << "{";
+  for (int i = 0; i < _ast.size(); i++) {
+    Node node = *_ast[i];
+    FDECL typedNode = *((FDECL *)(_ast[i]));
+    file << "\"" << (*_ast[i])._type << "\": \"" << (*_ast[i])._value << "\"";
+    // ast data
+    file << ", \"data\": {";
+    for (int j = 0; j < node._data.size(); j++) {
+      file << "\"" << typedNode._data[j]->_type << "\": \"" << (*_ast[i])._data[j]->_value << "\"";
+      if(j != (*_ast[i])._data.size() - 1) {
+        file << ",";
+      }
+    }
+    file << "}";
+    // ast data2
+    if((*_ast[i])._type == "FDECL") {
+    file << ", \"data2\": {";
+    for (int j = 0; j < (*((FDECL *)(_ast[i])))._data2.size(); j++) {
+      file << "\"" << (*((FDECL *)(_ast[i])))._data2[j]->_type << "\": \"" << (*((FDECL *)(_ast[i])))._data2[j]->_value << "\"";
+      if(j != (*((FDECL *)(_ast[i])))._data2.size() - 1) {
+        file << ",";
+      }
+    }
+    file << "}";
+    if(i != _ast.size() - 1) {
+      file << ",";
+    }
+    }
+  }
+  file << "}";
+  file.close();
+
+  /*
+  ofstream file;
+  file.open(filename);
+  file << "{";
+  for (int i = 0; i < _ast.size(); i++) {
+    file << "\"" << _ast[i]._type << "\": \"" << _ast[i]._value << "\"";
+    if(i != _ast.size() - 1) {
+      file << ",";
+    }
+  }
+  file << "}";
+  file.close();
+  */
+}

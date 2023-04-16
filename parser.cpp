@@ -23,6 +23,7 @@ void Parser::parse() {
     // function call
     if(_tokens[i][0] == "WORD" && _tokens[i+1][0] == "O-PAREN") {
       // cout << "Function call: " << _tokens[i][1] << "; ";
+      string name = _tokens[i][1];
       vector<AbstractNode> args = {};
       i += 2;
       while(_tokens[i][0] != "C-PAREN") {
@@ -36,7 +37,7 @@ void Parser::parse() {
         args.push_back(abnode);
         i++;
       }
-      FCALL fcall("FCALL", _tokens[i-1][1], args);
+      FCALL fcall("FCALL", name, args);
       AbstractNode node;
       node._type = "FCALL";
       node._FC = fcall;
@@ -55,7 +56,7 @@ void Parser::parse() {
         if(_tokens[i][0] == "O-PAREN") parens++;
         if(_tokens[i][0] == "C-PAREN") {parens--; break;}
         // cout << to_string(args.size()) << ": " << _tokens[i][1] << ";";
-        LITERAL nod("LITERAL", _tokens[i][1], {});
+        LITERAL nod(_tokens[i][0], _tokens[i][1], {});
         AbstractNode abnode;
         abnode._type = "LITERAL";
         abnode._LIT = nod;

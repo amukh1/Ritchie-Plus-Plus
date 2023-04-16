@@ -2,6 +2,7 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include <fstream>
 
 #include "lexer.h"
 #include "parser.h"
@@ -15,6 +16,9 @@ using namespace std;
 // its not that bad*
 
 int main() {
+  string filename = "out2.json";
+  ofstream file;
+  file.open(filename);
 
   Lexer lexer("test.lang");
   regex regexp(lexer.tokenRegex[3][1]);
@@ -32,15 +36,17 @@ int main() {
   Parser parser(lexer._tokens);
   // cout << "parse started" << endl;
   parser.parse();
-  cout << parser._ast[0]._FD._data2.size() << endl;
-  cout << stringify(parser._ast[0]) << endl;
+  cout << parser._ast[0]._FD.body.size() << endl;
+  string json = stringify(parser._ast[0]);
   // cout << "parsing done" << endl;
-  // cout << (*(FDECL*)(parser._ast[0]))._data2[0]->_type << endl;
+  // cout << (*(FDECL*)(parser._ast[0])).body[0]->_type << endl;
   // parser.printAST();
   // parser.out("out.ast");
-  // cout << ((FDECL*)(parser._ast[0]))->_data2.size() << endl;
+  // cout << ((FDECL*)(parser._ast[0]))->body.size() << endl;
 
   cout << "Out: " << endl << endl;
+
+  file << json;
 
   return 0;
 }

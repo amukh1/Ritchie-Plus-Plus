@@ -10,14 +10,14 @@ Node::Node(string type, string value, vector<AbstractNode> data) {
   _type = type;
   _value = value;
   _data = data;
-  // _data2 = data2;
+  // body = data2;
 }
 
 LITERAL::LITERAL(string type, string value, vector<AbstractNode> data) {
   _type = type;
   _value = value;
   _data = data;
-  // _data2 = {};
+  // body = {};
 }
 
 
@@ -25,7 +25,7 @@ FCALL::FCALL(string type, string value, vector<AbstractNode> data) {
   _type = type;
   _value = value;
   _data = data;
-  // _data2 = {};
+  // body = {};
 }
 
 
@@ -33,5 +33,5 @@ FDECL::FDECL(string type, string value, vector<AbstractNode> data, vector<Abstra
   _type = type;
   _value = value;
   _data = data;
-  _data2 = data2;
+  body = data2;
 }

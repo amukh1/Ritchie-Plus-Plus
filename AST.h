@@ -64,7 +64,7 @@ public:
 
 class FDECL: public Node {
 public:
-  vector<AbstractNode> _data2;
+  vector<AbstractNode> body;
   FDECL(string type, string value, vector<AbstractNode> data, vector<AbstractNode> data2);
   FDECL() = default;
   // ~FDECL();

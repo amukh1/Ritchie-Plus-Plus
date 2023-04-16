@@ -6,6 +6,7 @@
 #include "lexer.h"
 #include "parser.h"
 #include "AST.h"
+#include "jsonify.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ int main() {
   // cout << "parse started" << endl;
   parser.parse();
   cout << parser._ast[0]._FD._data2.size() << endl;
+  cout << stringify(parser._ast[0]) << endl;
   // cout << "parsing done" << endl;
   // cout << (*(FDECL*)(parser._ast[0]))._data2[0]->_type << endl;
   // parser.printAST();

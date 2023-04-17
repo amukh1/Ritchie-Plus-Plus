@@ -45,6 +45,7 @@ int main() {
   // cout << ((FDECL*)(parser._ast[0]))->body.size() << endl;
 
   cout << "Out: " << endl << endl;
+  cout << parser._ast[0]._FD.codegen() << endl;
 
   file << json;
 

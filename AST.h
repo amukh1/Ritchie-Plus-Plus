@@ -52,6 +52,7 @@ public:
   LITERAL(string type, string value, vector<AbstractNode> data);
   LITERAL() = default;
   // ~Literal();
+  string codegen();
 };
 
 class FCALL: public Node {
@@ -59,6 +60,7 @@ public:
   FCALL(string type, string value, vector<AbstractNode> data);
   FCALL() = default;
   // ~FCALL();
+  string codegen();
 };
 
 
@@ -68,6 +70,7 @@ public:
   FDECL(string type, string value, vector<AbstractNode> data, vector<AbstractNode> data2);
   FDECL() = default;
   // ~FDECL();
+  string codegen();
 };
 
 // class ExprOpen: public Node {

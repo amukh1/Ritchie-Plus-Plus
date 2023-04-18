@@ -1,3 +1,5 @@
-fun cheese(a,b,c,d) {
-   println("Hello World!"); println("Hello World!"); println("Hello World!");
+import "stdio.h";
+fun int main() {
+   printf("Hello World!");
+   return int 0;
 }

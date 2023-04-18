@@ -4,6 +4,6 @@
 
 using namespace std;
 
-string stringifyf(vector<AbstractNode> ast);
+string stringifyv(vector<AbstractNode> ast);
 
 string stringify(AbstractNode ast);

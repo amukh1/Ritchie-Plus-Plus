@@ -49,6 +49,8 @@ tokens = [
 */
 
 vector<vector<string>> regtok = {
+    {"COMMENT", "^\\/\\/.*\\/"},
+    {"MCOMMENT", "^\\/\\*[\\s\\S]*?\\*\\/"}, // 24
     {"NULL", "^\\s+"}, // 0
     {"SEMI", "^;"},
     {"NUMBER", "^[\\d\\.]+"}, // 2
@@ -72,8 +74,6 @@ vector<vector<string>> regtok = {
     {"MULT", "^\\*"}, // 20
     {"DIV", "^\\/"},
     {"CONCAT", "^\\.\\."}, // 22
-    {"COMMENT", "^\\/\\/.*\\/"},
-    {"MCOMMENT", "^\\/\\*[\\s\\S]*?\\*\\/"}, // 24
 };
 
 // screw c++, why does it take 9 lines for a strcpy??? :m_finger:

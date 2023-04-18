@@ -49,6 +49,7 @@ public:
 
 class LITERAL: public Node {
 public:
+  string ctype;
   LITERAL(string type, string value, vector<AbstractNode> data);
   LITERAL() = default;
   // ~Literal();
@@ -67,9 +68,27 @@ public:
 class FDECL: public Node {
 public:
   vector<AbstractNode> body;
+  string rtype;
   FDECL(string type, string value, vector<AbstractNode> data, vector<AbstractNode> data2);
   FDECL() = default;
   // ~FDECL();
+  string codegen();
+};
+
+class RET: public Node {
+public:
+  string ctype;
+  RET(string type, string value, vector<AbstractNode> data);
+  RET() = default;
+  // ~FCALL();
+  string codegen();
+};
+
+class IMP: public Node {
+public:
+  IMP(string type, string value, vector<AbstractNode> data);
+  IMP() = default;
+  // ~FCALL();
   string codegen();
 };
 
@@ -91,5 +110,7 @@ public:
   FDECL _FD;
   FCALL _FC;
   LITERAL _LIT;
+  RET _RET;
+  IMP _IMP;
   AbstractNode() = default;
 };

@@ -51,6 +51,13 @@ string stringify(AbstractNode ast) {
       }
     }
     out.append("]");
+  } else if (ast._type == "RET") {
+    RET ret = ast._RET;
+    out.append("\"value\":" + ret._value + ",");
+    out.append("\"type\":\"" + ret.ctype + "\"");
+  }else if (ast._type == "IMP") {
+    IMP imp = ast._IMP;
+    out.append("\"value\":" + imp._value);
   }
 
 
@@ -58,10 +65,13 @@ string stringify(AbstractNode ast) {
   return out;
 }
 
-// string stringifyf(vector<AbstractNode> ast) {
-//   string out = "";
-//   for (int i = 0; i < ast.size(); i++) {
-//     out += ast[i]._type + " " + ast[i]._value + " " + stringify(ast[i]._data) + " " + stringify(ast[i].body);
-//   }
-//   return out;
-// }
+string stringifyv(vector<AbstractNode> ast) {
+  string out = "[";
+  for (int i = 0; i < ast.size(); i++) {
+    out.append(stringify(ast[i]));
+    if(i != ast.size() - 1) {
+      out.append(",");
+    }
+  }
+  return out + "]";
+}

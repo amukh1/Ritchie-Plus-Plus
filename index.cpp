@@ -60,19 +60,19 @@ int main(int argc, char *argv[]) {
     // cgen.append(parser._ast[i].cgen());
     if(parser._ast[i]._type == "FDECL") {
       FDECL node = parser._ast[i]._FD;
-      cgen.append(node.codegen());
+      cgen.append(node.codegen(outtype));
     } else if(parser._ast[i]._type == "FCALL") {
       FCALL node = parser._ast[i]._FC;
-      cgen.append(node.codegen());
+      cgen.append(node.codegen(outtype));
     } else if(parser._ast[i]._type == "LITERAL") {
       LITERAL node = parser._ast[i]._LIT;
-      cgen.append(node.codegen());
+      cgen.append(node.codegen(outtype));
     } else if(parser._ast[i]._type == "RET") {
       RET node = parser._ast[i]._RET;
-      cgen.append(node.codegen());
+      cgen.append(node.codegen(outtype));
     } else if(parser._ast[i]._type == "IMP") {
       IMP node = parser._ast[i]._IMP;
-      cgen.append(node.codegen());
+      cgen.append(node.codegen(outtype));
     }
   }
   // cout << cgen << endl;

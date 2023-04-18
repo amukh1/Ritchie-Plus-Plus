@@ -53,7 +53,7 @@ public:
   LITERAL(string type, string value, vector<AbstractNode> data);
   LITERAL() = default;
   // ~Literal();
-  string codegen();
+  string codegen(string otype);
 };
 
 class FCALL: public Node {
@@ -61,7 +61,7 @@ public:
   FCALL(string type, string value, vector<AbstractNode> data);
   FCALL() = default;
   // ~FCALL();
-  string codegen();
+  string codegen(string otype);
 };
 
 
@@ -72,7 +72,7 @@ public:
   FDECL(string type, string value, vector<AbstractNode> data, vector<AbstractNode> data2);
   FDECL() = default;
   // ~FDECL();
-  string codegen();
+  string codegen(string otype);
 };
 
 class RET: public Node {
@@ -81,7 +81,7 @@ public:
   RET(string type, string value, vector<AbstractNode> data);
   RET() = default;
   // ~FCALL();
-  string codegen();
+  string codegen(string otype);
 };
 
 class IMP: public Node {
@@ -89,7 +89,7 @@ public:
   IMP(string type, string value, vector<AbstractNode> data);
   IMP() = default;
   // ~FCALL();
-  string codegen();
+  string codegen(string otype);
 };
 
 // class ExprOpen: public Node {

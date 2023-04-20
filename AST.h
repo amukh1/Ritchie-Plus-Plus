@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+// #include "AST.h"
+
 using namespace std;
 
 // union NodeTypes
@@ -27,6 +29,14 @@ using namespace std;
 //   }
 // };
 
+class x86 {
+public:
+  string type = "o";
+  string out = "section	.text\n        global _start\n";
+  void add(string addit);
+  void consts(vector<string>);
+};
+
 class AbstractNode;
 
 class Node {
@@ -37,7 +47,7 @@ public:
   // vector<Node> _data2;
   Node() = default;
   Node(string type, string value, vector<AbstractNode> data);
-//   void out(string filename);
+  //   void out(string filename);
   // ~Node();
 };
 
@@ -47,49 +57,49 @@ public:
 //   // ~nll();
 // };
 
-class LITERAL: public Node {
+class LITERAL : public Node {
 public:
   string ctype;
   LITERAL(string type, string value, vector<AbstractNode> data);
   LITERAL() = default;
   // ~Literal();
-  string codegen(string otype);
+  string codegen(string otype, x86* a);
 };
 
-class FCALL: public Node {
+class FCALL : public Node {
 public:
   FCALL(string type, string value, vector<AbstractNode> data);
   FCALL() = default;
   // ~FCALL();
-  string codegen(string otype);
+  string codegen(string otype, x86* a);
 };
 
-
-class FDECL: public Node {
+class FDECL : public Node {
 public:
   vector<AbstractNode> body;
   string rtype;
-  FDECL(string type, string value, vector<AbstractNode> data, vector<AbstractNode> data2);
+  FDECL(string type, string value, vector<AbstractNode> data,
+        vector<AbstractNode> data2);
   FDECL() = default;
   // ~FDECL();
-  string codegen(string otype);
+  string codegen(string otype, x86* a);
 };
 
-class RET: public Node {
+class RET : public Node {
 public:
   string ctype;
   RET(string type, string value, vector<AbstractNode> data);
   RET() = default;
   // ~FCALL();
-  string codegen(string otype);
+  string codegen(string otype, x86* a);
 };
 
-class IMP: public Node {
+class IMP : public Node {
 public:
   IMP(string type, string value, vector<AbstractNode> data);
   IMP() = default;
   // ~FCALL();
-  string codegen(string otype);
+  string codegen(string otype, x86* a);
 };
 
 // class ExprOpen: public Node {

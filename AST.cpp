@@ -1,6 +1,6 @@
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
 
 #include "AST.h"
 
@@ -20,7 +20,6 @@ LITERAL::LITERAL(string type, string value, vector<AbstractNode> data) {
   // body = {};
 }
 
-
 FCALL::FCALL(string type, string value, vector<AbstractNode> data) {
   _type = type;
   _value = value;
@@ -35,7 +34,6 @@ RET::RET(string type, string value, vector<AbstractNode> data) {
   // body = {};
 }
 
-
 IMP::IMP(string type, string value, vector<AbstractNode> data) {
   _type = type;
   _value = value;
@@ -43,10 +41,12 @@ IMP::IMP(string type, string value, vector<AbstractNode> data) {
   // body = {};
 }
 
-
-FDECL::FDECL(string type, string value, vector<AbstractNode> data, vector<AbstractNode> data2) {
+FDECL::FDECL(string type, string value, vector<AbstractNode> data,
+             vector<AbstractNode> data2) {
   _type = type;
   _value = value;
   _data = data;
   body = data2;
 }
+
+void x86::add(string addit) { out.append(addit); }

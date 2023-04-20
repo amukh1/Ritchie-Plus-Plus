@@ -1,0 +1,8 @@
+section	.text
+        global _start
+
+main:
+  push "Hello World!"
+  call printf
+
+  mov 0, eax

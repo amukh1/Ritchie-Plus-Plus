@@ -1,3 +1,7 @@
+
+section .bss
+
+v: resb 4
 section	.text
         global _start
     _start:
@@ -28,6 +32,7 @@ mov ebx, 1
 mov eax, 4 
 int 0x80 
 
+mov eax, 0 
 push edi 
 ret
 
@@ -42,6 +47,16 @@ main:
   push eax
   call println
 
+mov eax, 0
+mov [v], eax
+mov eax, RPP_CONSTANT_1
+mov [v], eax
+  mov eax, [v]
+  push eax
+  mov eax, 2
+  push eax
+  call println
+
   mov eax, 0
    ret
 
@@ -49,3 +64,4 @@ section .data
 
  NEWLINE db 10
 RPP_CONSTANT_0 db "Hello World!", 0
+RPP_CONSTANT_1 db "hi", 0

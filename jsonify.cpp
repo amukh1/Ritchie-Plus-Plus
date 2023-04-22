@@ -41,7 +41,8 @@ string stringify(AbstractNode ast) {
   }else if(ast._type == "LITERAL") {
     LITERAL node = ast._LIT;
     // cout << node._type + ":" + node._value << endl;
-    if(node._type == "LITERAL") { out.append("\"_value\":" + node._value + ","); } else
+    out.append("\"type\":\"" + node._type + "\",");
+    if(node._type == "STRING") { out.append("\"_value\":" + node._value + ","); } else
     out.append("\"_value\":\"" + node._value + "\",");
     out.append("\"_data\":[");
     for (int i = 0; i < node._data.size(); i++) {
@@ -58,6 +59,12 @@ string stringify(AbstractNode ast) {
   }else if (ast._type == "IMP") {
     IMP imp = ast._IMP;
     out.append("\"value\":" + imp._value);
+  }else if(ast._type == "ASM") {
+    ASM asm_ = ast._ASM;
+    out.append("\"value\":" + asm_._value + "");
+  }else if(ast._type == "ASSIGN") {
+    ASSIGN assign = ast._ASSIGN;
+    out.append("\"value\":" + assign._value);
   }
 
 

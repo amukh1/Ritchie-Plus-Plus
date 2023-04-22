@@ -25,9 +25,13 @@ void Parser::parse() {
       vector<AbstractNode> args = {};
       i += 2;
       while (_tokens[i][0] != "C-PAREN") {
+        if (_tokens[i][0] == "COMMA") {
+          i++;
+          continue;
+        }
         // cout << to_string(args.size()) << ": " << _tokens[i][1] << ";";
         // args.push_back(Node("LITERAL", _tokens[i][1], {}));
-        LITERAL lit("LITERAL", _tokens[i][1], {});
+        LITERAL lit(_tokens[i][0], _tokens[i][1], {});
         struct AbstractNode abnode;
         abnode._type = "LITERAL";
         abnode._LIT = lit;
@@ -44,14 +48,14 @@ void Parser::parse() {
       // cout << "Parsed an FCALL Node" << endl;
     }
     // function declaration + definition
-    else if (_tokens[i][0] == "WORD" && _tokens[i + 1][0] == "WORD" &&
-             _tokens[i + 2][0] == "WORD" && _tokens[i + 3][0] == "O-PAREN" &&
-             _tokens[i][1] == "fun") {
-      vector<string> name = _tokens[i + 2];
-      string rtype = _tokens[i + 1][1];
+    else if (_tokens[i][0] == "WORD" && _tokens[i + 1][0] == "WORD" && _tokens[i + 2][0] == "O-PAREN" &&
+             _tokens[i][1] == "func") {
+      vector<string> name = _tokens[i + 1];
+      // if(name[1] == "main") name[1] = "_start";
+      // string rtype = _tokens[i + 1][1];
       // cout << "Function declaration: " << _tokens[i][1] << "; ";
       vector<AbstractNode> args = {};
-      i += 4;
+      i += 3;
       int parens = 1;
       while (parens > 0) {
         // cout << _tokens[i][0] << endl;
@@ -66,13 +70,14 @@ void Parser::parse() {
           break;
         }
         // cout << to_string(args.size()) << ": " << _tokens[i][1] << ";";
-        LITERAL nod(_tokens[i + 1][0], _tokens[i + 1][1], {});
-        nod.ctype = _tokens[i][1];
+        LITERAL nod(_tokens[i][0], _tokens[i][1], {});
+        // nod.ctype = _tokens[i][1];
+        nod.ctype = "DROPPED SUPPORT FOR C";
         AbstractNode abnode;
         abnode._type = "LITERAL";
         abnode._LIT = nod;
         args.push_back(abnode);
-        i += 2;
+        i += 1;
       }
       i += 2;
       vector<vector<string>> body = {};
@@ -85,23 +90,25 @@ void Parser::parse() {
       Parser par(body);
       par.parse();
       FDECL fdecl("FDECL", name[1], args, par._ast);
-      fdecl.rtype = rtype;
+      // fdecl.rtype = rtype;
+      fdecl.rtype = "DROPPED SUPPORT FOR C";
       AbstractNode abnode;
       abnode._type = "FDECL";
       abnode._FD = fdecl;
       _ast.push_back(abnode);
-      i++;
+      i+=2;
       // par.out("par.ast");
 
       // cout << "Parsed an FDECL Node" << endl;
     } else if (_tokens[i][0] == "WORD" && _tokens[i][1] == "return") {
-      RET ret("RET", _tokens[i + 2][1], {});
-      ret.ctype = _tokens[i + 1][1];
+      RET ret("RET", _tokens[i + 1][1], {});
+      // ret.ctype = _tokens[i + 1][1];
+      ret.ctype = "DROPPED SUPPORT FOR C";
       AbstractNode abnode;
       abnode._type = "RET";
       abnode._RET = ret;
       _ast.push_back(abnode);
-      i += 3;
+      i += 2;
     } else if (_tokens[i][0] == "WORD" && _tokens[i][1] == "import") {
       IMP imp("IMP", _tokens[i + 1][1], {});
       AbstractNode abnode;
@@ -109,8 +116,29 @@ void Parser::parse() {
       abnode._IMP = imp;
       _ast.push_back(abnode);
       i += 2;
-    } else {
-      cout << "Error: " << _tokens[i][0] << " " << _tokens[i][1] << endl;
+    } else if(_tokens[i][0] == "WORD" && _tokens[i][1] == "ASM" && _tokens[i+1][0] == "O-BRACE") {
+      string asmcode = _tokens[i+2][1];
+      ASM asmnode("ASM", asmcode, {});
+      AbstractNode abnode;
+      abnode._type = "ASM";
+      abnode._ASM = asmnode;
+      _ast.push_back(abnode);
+      i+=3;
+    }else if(_tokens[i][0] == "WORD" && _tokens[i+1][0] == "WORD" && _tokens[i][1] == "var") {
+      string name = _tokens[i+1][1];
+      string value = _tokens[i+3][1];
+      LITERAL lit(_tokens[i+3][0], value, {});
+      AbstractNode abnode1;
+      abnode1._type = "LITERAL";
+      abnode1._LIT = lit;
+      ASSIGN var(name, value, {abnode1});
+      AbstractNode abnode;
+      abnode._type = "ASSIGN";
+      abnode._ASSIGN = var;
+      _ast.push_back(abnode);
+      i+=4;
+    }else {
+      cout << "Error: " << _tokens[i][0] << " " << _tokens[i][1] << " at " << to_string(i) << endl;
     }
     // cout << "Token:" << _tokens[i][0] << " " << _tokens[i][1] << endl;
   }

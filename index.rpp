@@ -1,5 +1,10 @@
-import "stdio.h";
-fun int main() {
-   printf("Hello World!");
-   return int 0;
-}
+import "stdio";
+import "stdlib";
+
+func main(argc, argv) {
+   println("Hello World!", 12);
+   var v = 0;
+   var v = "hi";
+   println(v, 2);
+   return 0;
+};

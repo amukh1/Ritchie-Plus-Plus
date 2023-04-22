@@ -32,9 +32,15 @@ using namespace std;
 class x86 {
 public:
   string type = "o";
-  string out = "section	.text\n        global _start\n";
+  string out = "section	.text\n        global _start\n    _start:\n call main \n call end";
+  string data = "\nsection .data\n\n NEWLINE db 10\n";
+  string bss = "\nsection .bss\n\n";
+  vector<string> vars;
+  int constants = 0;
   void add(string addit);
-  void consts(vector<string>);
+  string constant(string ctype, string cvalue);
+  string variable(string vtype, string vname, string vvalue);
+  void sout();
 };
 
 class AbstractNode;
@@ -102,6 +108,22 @@ public:
   string codegen(string otype, x86* a);
 };
 
+class ASM : public Node {
+public:
+  ASM(string type, string value, vector<AbstractNode> data);
+  ASM() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
+class ASSIGN : public Node {
+public:
+  ASSIGN(string type, string value, vector<AbstractNode> data);
+  ASSIGN() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
 // class ExprOpen: public Node {
 // public:
 //   ExprOpen(string type, string value, vector<Node> data);
@@ -122,5 +144,7 @@ public:
   LITERAL _LIT;
   RET _RET;
   IMP _IMP;
+  ASM _ASM;
+  ASSIGN _ASSIGN;
   AbstractNode() = default;
 };

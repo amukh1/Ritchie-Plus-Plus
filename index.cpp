@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
   string outtyp = (string)argv[2];
   switch (outtyp[1]) {
   case 'o':
-    outtype = "o";
+    outtype = "asm";
     break;
   case 'c':
     outtype = "c";
@@ -63,19 +63,22 @@ int main(int argc, char *argv[]) {
     // cgen.append(parser._ast[i].cgen());
     if (parser._ast[i]._type == "FDECL") {
       FDECL node = parser._ast[i]._FD;
-      cgen.append(node.codegen(outtype, assembly));
+      cgen.append(node.codegen(to_string(outtyp[1]), assembly));
     } else if (parser._ast[i]._type == "FCALL") {
       FCALL node = parser._ast[i]._FC;
-      cgen.append(node.codegen(outtype, assembly));
+      cgen.append(node.codegen(to_string(outtyp[1]), assembly));
     } else if (parser._ast[i]._type == "LITERAL") {
       LITERAL node = parser._ast[i]._LIT;
-      cgen.append(node.codegen(outtype, assembly));
+      cgen.append(node.codegen(to_string(outtyp[1]), assembly));
     } else if (parser._ast[i]._type == "RET") {
       RET node = parser._ast[i]._RET;
-      cgen.append(node.codegen(outtype, assembly));
+      cgen.append(node.codegen(to_string(outtyp[1]), assembly));
     } else if (parser._ast[i]._type == "IMP") {
       IMP node = parser._ast[i]._IMP;
-      cgen.append(node.codegen(outtype, assembly));
+      cgen.append(node.codegen(to_string(outtyp[1]), assembly));
+    }else if (parser._ast[i]._type == "ASSIGN") {
+      ASSIGN node = parser._ast[i]._ASSIGN;
+      cgen.append(node.codegen(to_string(outtyp[1]), assembly));
     }
   }
   // cout << cgen << endl;
@@ -83,16 +86,17 @@ int main(int argc, char *argv[]) {
   file << json;
 
   ofstream file2;
-  file2.open((string)argv[3] + "." + outtyp[1]);
+  file2.open((string)argv[3] + "." + outtype);
   if(outtype == "c")
   {file2 << cgen;
     cout << "Transpiled " << argv[1] << " to " << argv[3] << "." << outtyp[1]
        << endl;
   }else {
-cout << "Compiled " << argv[1] << " to " << argv[3] << "." << outtyp[1]
+    assembly->sout();
+cout << "Compiled " << argv[1] << " to " << argv[3] << "." << outtype
        << endl;
-  cout << assembly->out << endl;
-    file2 << assembly->out;
+  // cout << assembly->out << endl;
+    file2 << assembly->bss;
 
   }
 

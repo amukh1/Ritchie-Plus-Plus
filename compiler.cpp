@@ -1,49 +1,103 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <map>
 
 #include "AST.h"
 
 using namespace std;
 
+string stdio = "\nprintln: \n\
+pop edi \n\
+pop edx \n\
+pop ecx \n\
+mov ebx, 1 \n\
+mov eax, 4 \n\
+int 0x80 \n\
+\n\
+mov edx, 1 \n\
+mov ecx, NEWLINE \n\
+mov ebx, 1 \n\
+mov eax, 4 \n\
+int 0x80 \n\
+\n\
+push edi \n\
+ret \n\
+\n\
+print: \n\
+pop edi \n\
+pop edx \n\
+pop ecx \n\
+mov ebx, 1 \n\
+mov eax, 4 \n\
+int 0x80 \n\
+\n\
+mov eax, 0 \n\
+push edi \n\
+ret\n";
+
+string stdlib = "\nend: \n\
+mov eax, 1 \n\
+int 0x80 \n";
+
 string RET::codegen(string otype, x86* a) {
-  if (otype == "c") {
+  if (false) {
     return "return " + _value + ";";
-  } else if (otype == "o") {
-    return "  mov " + _value + ", eax\n";
+  } else if (true) {
+    return "  mov eax, " + _value + "\n   ret\n";
   } else
     return "";
 }
 
 string IMP::codegen(string otype, x86* a) {
-  if (otype == "c") {
+  if (false) {
     return "#include " + _value;
-  } else if (otype == "o") {
-    return "assembly import " + _value + "\n";
+  } else if (true) {
+    // get asm from package folder
+    // fstream file;
+    // cout << "./packages/" + _value.erase(0,1).erase(_value.size()-1,1) + ".asm" << endl;
+    // file.open("./packages/" + _value.erase(0,1).erase(_value.size()-1,1) + ".asm");
+    // string line;
+    // while (getline(file, line)) {
+    //   cout << line << endl;
+    //   a->add(line + "\n");
+    // }
+    // file.close();
+    if(_value == "\"stdio\"") a->add(stdio);
+    if(_value == "\"stdlib\"") a->add(stdlib);
+    return "\n";
   } else
     return "";
 }
 
 string LITERAL::codegen(string otype, x86* a) {
-  if (otype == "c") {
+  if (false) {
     return _value;
-  } else if (otype == "o") {
+  } else if (true) {
     return _value;
   } else
     return "";
 }
 
 string FCALL::codegen(string otype, x86* a) {
-  if (otype == "c") {
+  if (false) {
     string code = _value + "(";
     for (int i = 0; i < _data.size(); i++) {
       code += _data[i]._LIT._value;
     }
     code += ")";
     return code + ";";
-  } else if (otype == "o") {
+  } else if (true) {
     for (int i = 0; i < _data.size(); i++) {
-      a->add("  push " + _data[i]._LIT._value + "\n");
+      if(_data[i]._LIT._value != ","){
+      if(_data[i]._LIT._type == "STRING")
+      a->add("  mov eax, " +  a->constant(_data[i]._LIT.ctype, _data[i]._LIT._value) +  "\n  push eax\n");
+      else if(_data[i]._LIT._type == "WORD")
+      a->add("  mov eax, [" + _data[i]._LIT._value + "]\n  push eax\n");
+      else if(_data[i]._LIT._type == "NUMBER")
+      a->add("  mov eax, " +  _data[i]._LIT._value +  "\n  push eax\n");
+      }
     }
     a->add("  call " + _value + "\n\n");
     // a->out.app;
@@ -51,8 +105,18 @@ string FCALL::codegen(string otype, x86* a) {
   } else
     return "";
 }
+
+string ASM::codegen(string otype, x86* a) {
+  return _value + "\n";
+}
+
+string ASSIGN::codegen(string otype, x86* a) {
+    a->add(a->variable(_data[0]._LIT._type, _type, _value));
+    return "";
+}
+
 string FDECL::codegen(string otype, x86* a) {
-  if (otype == "c") {
+  if (false) {
     string code = "\n" + rtype + " " + _value + "(";
     for (int i = 0; i < _data.size(); i++) {
       code += _data[i]._LIT.ctype + " " + _data[i]._LIT.codegen(otype, a);
@@ -72,16 +136,20 @@ string FDECL::codegen(string otype, x86* a) {
       }
     }
     return code + "\n}";
-  } else if (otype == "o") {
+  } else if (true) {
     a->add("\n" + _value +":\n");
     string code = "";
     for (int i = 0; i < body.size(); i++) {
-      if (body[i]._type == "RET") {
+      if(body[i]._type == "ASSIGN"){
+        code +=   body[i]._ASSIGN.codegen(otype,a);
+      }else if (body[i]._type == "RET") {
         code +=   body[i]._RET.codegen(otype,a);
       } else if (body[i]._type == "FCALL") {
         code +=   body[i]._FC.codegen(otype,a);
       } else if (body[i]._type == "IMP") {
         code +=   body[i]._IMP.codegen(otype,a);
+      }else if(body[i]._type == "ASM"){
+        code +=   body[i]._ASM.codegen(otype,a).erase(0,1).erase(body[i]._ASM.codegen(otype,a).size()-2,1);
       }
     }
     a->add(code);

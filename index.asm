@@ -2,6 +2,8 @@
 section .bss
 
 v: resb 4
+a: resb 4
+b: resb 4
 section	.text
         global _start
     _start:
@@ -52,6 +54,17 @@ mov [v], eax
 mov eax, RPP_CONSTANT_1
 mov [v], eax
   mov eax, [v]
+  push eax
+  mov eax, 2
+  push eax
+  call println
+
+lea eax, v
+mov [a], eax
+mov eax, [a]
+ mov edx, [eax] 
+ mov [b], edx
+  mov eax, [b]
   push eax
   mov eax, 2
   push eax

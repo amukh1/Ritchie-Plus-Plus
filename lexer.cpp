@@ -71,9 +71,10 @@ vector<vector<string>> regtok = {
     {"COMMA", "^,"},
     {"ADD", "^\\+"}, // 18
     {"SUB", "^-"},
-    {"MULT", "^\\*"}, // 20
+    {"STAR", "^\\*"}, // 20
     {"DIV", "^\\/"},
     {"CONCAT", "^\\.\\."}, // 22
+    {"AMP", "^&"}, // 22
 };
 
 // screw c++, why does it take 9 lines for a strcpy??? :m_finger:

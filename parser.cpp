@@ -137,6 +137,32 @@ void Parser::parse() {
       abnode._ASSIGN = var;
       _ast.push_back(abnode);
       i+=4;
+    }else if(_tokens[i][0] == "WORD" && _tokens[i+2][0] == "WORD" && _tokens[i][1] == "var" && _tokens[i+1][0] == "AMP") {
+      string name = _tokens[i+2][1];
+      string value = _tokens[i+4][1];
+      LITERAL lit(_tokens[i+4][0], value, {});
+      AbstractNode abnode1;
+      abnode1._type = "LITERAL";
+      abnode1._LIT = lit;
+      REFER var(name, value, {abnode1});
+      AbstractNode abnode;
+      abnode._type = "REFER";
+      abnode._REFER = var;
+      _ast.push_back(abnode);
+      i+=5;
+    }else if(_tokens[i][0] == "WORD" && _tokens[i+2][0] == "WORD" && _tokens[i][1] == "var" && _tokens[i+1][0] == "STAR") {
+      string name = _tokens[i+2][1];
+      string value = _tokens[i+4][1];
+      LITERAL lit(_tokens[i+4][0], value, {});
+      AbstractNode abnode1;
+      abnode1._type = "LITERAL";
+      abnode1._LIT = lit;
+      DEREF var(name, value, {abnode1});
+      AbstractNode abnode;
+      abnode._type = "DEREF";
+      abnode._DEREF = var;
+      _ast.push_back(abnode);
+      i+=5;
     }else {
       cout << "Error: " << _tokens[i][0] << " " << _tokens[i][1] << " at " << to_string(i) << endl;
     }

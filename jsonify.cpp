@@ -65,6 +65,12 @@ string stringify(AbstractNode ast) {
   }else if(ast._type == "ASSIGN") {
     ASSIGN assign = ast._ASSIGN;
     out.append("\"value\":" + assign._value);
+  }else if(ast._type == "REFER") {
+    REFER refer = ast._REFER;
+    out.append("\"value\":" + refer._value);
+  }else if(ast._type == "DEREF") {
+    DEREF deref = ast._DEREF;
+    out.append("\"value\":" + deref._value);
   }
 
 

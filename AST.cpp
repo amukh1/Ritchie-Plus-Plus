@@ -64,6 +64,20 @@ ASSIGN::ASSIGN(string type, string value, vector<AbstractNode> data) {
   // body = {};
 }
 
+REFER::REFER(string type, string value, vector<AbstractNode> data) {
+  _type = type;
+  _value = value;
+  _data = data;
+  // body = {};
+}
+
+DEREF::DEREF(string type, string value, vector<AbstractNode> data) {
+  _type = type;
+  _value = value;
+  _data = data;
+  // body = {};
+}
+
 void x86::add(string addit) { out.append(addit); }
 
 void x86::sout() { bss.append(out.append(data)); }
@@ -87,3 +101,40 @@ string x86::variable(string vtype, string vname, string vvalue) {
       return "mov eax, " + vvalue + "\nmov [" + vname + "], eax" + "\n";
     }
 }
+
+string x86::point(string vtype, string vname, string vvalue) {
+  // a->constant(_data[i]._LIT.ctype, _data[i]._LIT._value)
+  if (!(find(vars.begin(), vars.end(), vname) != vars.end())) {
+        vars.push_back(vname);
+        bss.append(vname + ": resb 4\n");
+    }
+    // return "mov eax, " + vvalue + "\nmov [" + vname + "], eax" + "\n";
+    if(vtype == "STRING") {
+      return "lea eax, " + constant(vtype, vvalue) + "\nmov [" + vname + "], eax" + "\n";
+    }else {
+      return "lea eax, " + vvalue + "\nmov [" + vname + "], eax" + "\n";
+    }
+}
+
+string x86::deref(string vtype, string vname, string vvalue) {
+  // a->constant(_data[i]._LIT.ctype, _data[i]._LIT._value)
+  if (!(find(vars.begin(), vars.end(), vname) != vars.end())) {
+        vars.push_back(vname);
+        bss.append(vname + ": resb 4\n");
+    }
+    // return "mov eax, " + vvalue + "\nmov [" + vname + "], eax" + "\n";
+      // return "mov eax, [" + constant(vtype, vvalue) + "]\nmov [" + vname + "], eax" + "\n";
+      return "mov eax, [" + vvalue + "]\n mov edx, [eax] \n mov [" + vname + "], edx" + "\n";
+}
+
+
+/*
+-- var& a = v;
+lea eax, v -- pointer into eax
+mov [a], eax -- pointer into a
+
+-- var* b = a;
+mov eax, [a] -- pointer into eax
+mov edx, [eax] -- value into edx
+mov [b], [edx] -- deref into b
+*/

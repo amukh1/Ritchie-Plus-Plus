@@ -40,6 +40,8 @@ public:
   void add(string addit);
   string constant(string ctype, string cvalue);
   string variable(string vtype, string vname, string vvalue);
+  string point(string vtype, string vname, string vvalue);
+  string deref(string vtype, string vname, string vvalue);
   void sout();
 };
 
@@ -124,6 +126,23 @@ public:
   string codegen(string otype, x86* a);
 };
 
+class REFER : public Node {
+public:
+  REFER(string type, string value, vector<AbstractNode> data);
+  REFER() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
+class DEREF : public Node {
+  public:
+  DEREF(string type, string value, vector<AbstractNode> data);
+  DEREF() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
+
 // class ExprOpen: public Node {
 // public:
 //   ExprOpen(string type, string value, vector<Node> data);
@@ -146,5 +165,7 @@ public:
   IMP _IMP;
   ASM _ASM;
   ASSIGN _ASSIGN;
+  REFER _REFER;
+  DEREF _DEREF;
   AbstractNode() = default;
 };

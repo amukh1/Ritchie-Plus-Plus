@@ -10,8 +10,5 @@ func main(argc, argv) {
    var* b = a;
    println(b, 2);
 
-   var c = println(b,2);
-   println(c, 12);
-
    return 0;
 };

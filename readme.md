@@ -1,4 +1,5 @@
-[![npm version](https://badge.fury.io/js/ritchie.svg)](https://www.npmjs.com/package/ritchie)
+<!-- [![npm version](https://badge.fury.io/js/ritchie.svg)](https://www.npmjs.com/package/ritchie) -->
+[![GitHub version](https://badge.fury.io/gh/amukh1%2FRitchie-Plus-Plus.svg)](https://badge.fury.io/gh/amukh1%2FRitchie-Plus-Plus)
 
 # Ritchie ++
 
@@ -8,23 +9,25 @@
 
 > Contact me for help, because I *will* respond. Discord: amukh1#9613
 
-## Getting Started
+# Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## Installation
+# Installation
 <br>
 
 **BEFORE YOU INSTALL:** please read the [prerequisites](#prerequisites)
 
 <br>
-To install and set up the library, run:
+
+## To install and set up the library, run:
 
 From Github:
 
 ```sh
 $ git clone https://github.com/amukh1/Ritchie-Plus-Plus
 $ cd Ritchie-Plus-Plus
+$ g++ *.cpp -o rpp
 $ sudo cp ./rpp /usr/bin
 ```
 
@@ -42,23 +45,41 @@ $ sudo apt install rpp
 ![img](./rvsco.png) -->
 
 
-## Usage
+# Usage
 
 <br>
 
-For x86 (Linux):
+## For x86 (Intel Linux):
 ```sh
 $ rpp ./name.rpp -o name
 $ nasm -f elf64 name.asm
-$ ld name.o -o name
+$ ld -m elf_i386 -o -s name.o -o name
+$ ./name
 ```
-For C (Depreciated):
+## For C (Depreciated):
 ```sh
 $ rpp ./name.rpp -c name
+$ gcc name.c -o name
+$ ./name
 ```
 
-ASM compiles to bytecode with NASM on Linux (if your on Windows/OSX use an online assembler).
-[Web Assembler](https://www.jdoodle.com/compile-assembler-nasm-online/)
+## ASM compiles to bytecode with NASM on Linux (if your on Windows/OSX use an online [assembler](https://www.jdoodle.com/compile-assembler-nasm-online/)).
+<!-- ## [Web Assembler](https://www.jdoodle.com/compile-assembler-nasm-online/) -->
+
+## Alternatively, if you are not on an Intel Machine, you can use *QEMU* to emulate an x86 machine.
+
+## Install QEMU:
+```sh
+$ sudo apt install qemu
+```
+
+## Run QEMU:
+```sh
+$ rpp ./name.rpp -o name
+$ nasm -f elf64 name.asm
+$ ld -m elf_i386 -o -s name.o -o name
+$ qemu-i386 ./name
+```
 
 ## Example program:
 <br>
@@ -78,6 +99,12 @@ func main(argc, argv) {
 
    return 0; /* Returns 0 */
 };
+```
+
+```
+Hello World!
+hi
+hi
 ```
 <!-- ## Wanna learn more? check out the docs: [Visit docs](https://ritchie.js.org/docs) -->
 

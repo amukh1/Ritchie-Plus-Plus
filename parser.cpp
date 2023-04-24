@@ -127,7 +127,21 @@ void Parser::parse() {
     }else if(_tokens[i][0] == "WORD" && _tokens[i+1][0] == "WORD" && _tokens[i][1] == "var") {
       string name = _tokens[i+1][1];
       string value = _tokens[i+3][1];
-      LITERAL lit(_tokens[i+3][0], value, {});
+      string t = _tokens[i+3][0];
+      // int oli = i;
+
+      vector<vector<string>> toks = {};
+      i+=3;
+      while(_tokens[i][0] != "SEMI") {
+        toks.push_back(_tokens[i]);
+        i++;
+      }
+      // parse tokens
+      Parser par(toks);
+      par.parse();
+
+
+      LITERAL lit(t, value, par._ast);
       AbstractNode abnode1;
       abnode1._type = "LITERAL";
       abnode1._LIT = lit;
@@ -136,7 +150,8 @@ void Parser::parse() {
       abnode._type = "ASSIGN";
       abnode._ASSIGN = var;
       _ast.push_back(abnode);
-      i+=4;
+      // cout << oli - i << endl;
+      // i+=4;
     }else if(_tokens[i][0] == "WORD" && _tokens[i+2][0] == "WORD" && _tokens[i][1] == "var" && _tokens[i+1][0] == "AMP") {
       string name = _tokens[i+2][1];
       string value = _tokens[i+4][1];
@@ -164,7 +179,14 @@ void Parser::parse() {
       _ast.push_back(abnode);
       i+=5;
     }else {
-      cout << "Error: " << _tokens[i][0] << " " << _tokens[i][1] << " at " << to_string(i) << endl;
+      // make it a literal
+      LITERAL lit(_tokens[i][0], _tokens[i][1], {});
+      AbstractNode abnode;
+      abnode._type = "LITERAL";
+      abnode._LIT = lit;
+      _ast.push_back(abnode);
+      // i++;
+      // cout << "Error: " << _tokens[i][0] << " " << _tokens[i][1] << " at " << to_string(i) << endl;
     }
     // cout << "Token:" << _tokens[i][0] << " " << _tokens[i][1] << endl;
   }

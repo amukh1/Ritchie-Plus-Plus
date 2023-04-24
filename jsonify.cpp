@@ -64,12 +64,15 @@ string stringify(AbstractNode ast) {
     out.append("\"value\":" + asm_._value + "");
   }else if(ast._type == "ASSIGN") {
     ASSIGN assign = ast._ASSIGN;
+    out.append("\"name\":\"" + assign._type + "\",");
     out.append("\"value\":" + assign._value);
   }else if(ast._type == "REFER") {
     REFER refer = ast._REFER;
     out.append("\"value\":" + refer._value);
   }else if(ast._type == "DEREF") {
     DEREF deref = ast._DEREF;
+    out.append("\"type\":\n" + deref._type + "\n,");
+    if(deref._type == "STRING") { out.append("\"value\":" + deref._value + ","); } else
     out.append("\"value\":" + deref._value);
   }
 

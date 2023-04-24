@@ -136,5 +136,5 @@ mov [a], eax -- pointer into a
 -- var* b = a;
 mov eax, [a] -- pointer into eax
 mov edx, [eax] -- value into edx
-mov [b], [edx] -- deref into b
+mov [b], edx -- deref into b
 */

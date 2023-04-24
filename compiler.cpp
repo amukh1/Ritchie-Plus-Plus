@@ -101,7 +101,7 @@ string FCALL::codegen(string otype, x86* a) {
     }
     a->add("  call " + _value + "\n\n");
     // a->out.app;
-    return "";
+    return "eax";
   } else
     return "";
 }
@@ -111,7 +111,13 @@ string ASM::codegen(string otype, x86* a) {
 }
 
 string ASSIGN::codegen(string otype, x86* a) {
+    if(_data[0]._LIT._data[0]._type == "LITERAL")
     a->add(a->variable(_data[0]._LIT._type, _type, _value));
+    else {
+      // must be a function call
+
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen(otype,a)));
+    }
     return "";
 }
 
@@ -140,7 +146,8 @@ string FDECL::codegen(string otype, x86* a) {
       if (body[i]._type == "RET") {
         code += "  " + body[i]._RET.codegen(otype,a) + "\n";
       } else if (body[i]._type == "FCALL") {
-        code += "  " + body[i]._FC.codegen(otype,a) + "\n";
+        // code += "  " + body[i]._FC.codegen(otype,a) + "\n";
+        body[i]._FC.codegen(otype,a);
       } else if (body[i]._type == "IMP") {
         code += "  " + body[i]._IMP.codegen(otype,a) + "\n";
       }else if(body[i]._type == "ASM"){
@@ -157,7 +164,8 @@ string FDECL::codegen(string otype, x86* a) {
       }else if (body[i]._type == "RET") {
         code +=   body[i]._RET.codegen(otype,a);
       } else if (body[i]._type == "FCALL") {
-        code +=   body[i]._FC.codegen(otype,a);
+        // code +=   body[i]._FC.codegen(otype,a);
+        body[i]._FC.codegen(otype,a);
       } else if (body[i]._type == "IMP") {
         code +=   body[i]._IMP.codegen(otype,a);
       }else if(body[i]._type == "ASM"){

@@ -52,11 +52,11 @@ $ sudo apt install rpp
 ## For x86 (Intel Linux):
 ```sh
 $ rpp ./name.rpp -o name
-$ nasm -f elf64 name.asm
+$ nasm -f elf name.asm
 $ ld -m elf_i386 -o -s name.o -o name
 $ ./name
 ```
-## For C (Depreca ted):
+## For C (Deprecated):
 ```sh
 $ rpp ./name.rpp -c name
 $ gcc name.c -o name
@@ -76,7 +76,7 @@ $ sudo apt install qemu
 ## Run QEMU:
 ```sh
 $ rpp ./name.rpp -o name
-$ nasm -f elf64 name.asm
+$ nasm -f elf name.asm
 $ ld -m elf_i386 -o -s name.o -o name
 $ qemu-i386 ./name
 ```

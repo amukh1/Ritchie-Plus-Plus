@@ -106,6 +106,9 @@ Hello World!
 hi
 hi
 ```
+
+Note: If you choose to try out the example sin the example folder, you will need to compile them using r++ on your system
+
 <!-- ## Wanna learn more? check out the docs: [Visit docs](https://ritchie.js.org/docs) -->
 
 <!-- <style>

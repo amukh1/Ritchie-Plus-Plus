@@ -9,6 +9,5 @@ func main(argc, argv) {
    var& a = v;
    var* b = a;
    println(b, 2);
-
    return 0;
 };

@@ -49,7 +49,7 @@ $ sudo apt install rpp
 
 <br>
 
-## For x86 (Intel Linux):
+## For x86 (Intel-AMD Linux):
 ```sh
 $ rpp ./name.rpp -o name
 $ nasm -f elf name.asm

@@ -141,26 +141,26 @@ hi
 
 <br>
 
-## Contributing
+# Contributing
 
 You can contribute to the project by making a pull request on [GitHub](https://github.com/amukh1/Ritchie-Plus-Plus).
 
-## Credits
+# Credits
 
-### Amukh1.
+## Amukh1.
 
-## Built With
+# Built With
 
 * [C++](https://cplusplus.com/)
 * [Assembly](http://x86asm.net/)
 * [Love](https://amukh1.dev)
 
-## Authors
+# Authors
 
 * **Amukh1** - [Github](https://github.com/amukh1) / amukh1#9613
 
 See also the list of [contributors](https://github.com/amukh1/Ritchie-Plus-Plus/contributors) who participated in this project.
 
-## License
+# License
 
 [MIT License](https://mit-license.org/2022) © Amukh1

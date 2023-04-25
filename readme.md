@@ -56,7 +56,7 @@ $ nasm -f elf64 name.asm
 $ ld -m elf_i386 -o -s name.o -o name
 $ ./name
 ```
-## For C (Depreciated):
+## For C (Deprecated):
 ```sh
 $ rpp ./name.rpp -c name
 $ gcc name.c -o name

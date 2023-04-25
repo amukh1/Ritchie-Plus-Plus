@@ -1,0 +1,14 @@
+import "stdio"; /* Imports the standard input/output library */
+import "stdlib"; /* Imports the standard library */
+
+func main(argc, argv) {
+   println("Hello World!", 12); /* Prints "Hello World!" */
+   var v = 0; /* Declares a variable */
+   var v = "hi"; /* Re-Declares a variable */
+   println(v, 2); /* Prints the value of v */
+   var& a = v; /* Declares a reference to v */
+   var* b = a; /* De-Reference a */
+   println(b, 2); /* Prints the value of b */
+
+   return 0; /* Returns 0 */
+};

@@ -49,14 +49,14 @@ $ sudo apt install rpp
 
 <br>
 
-## For x86 (Intel Linux):
+## For x86 (Intel-AMD Linux):
 ```sh
 $ rpp ./name.rpp -o name
-$ nasm -f elf64 name.asm
+$ nasm -f elf name.asm
 $ ld -m elf_i386 -o -s name.o -o name
 $ ./name
 ```
-## For C (Depreca ted):
+## For C (Deprecated):
 ```sh
 $ rpp ./name.rpp -c name
 $ gcc name.c -o name
@@ -76,7 +76,7 @@ $ sudo apt install qemu
 ## Run QEMU:
 ```sh
 $ rpp ./name.rpp -o name
-$ nasm -f elf64 name.asm
+$ nasm -f elf name.asm
 $ ld -m elf_i386 -o -s name.o -o name
 $ qemu-i386 ./name
 ```
@@ -106,6 +106,9 @@ Hello World!
 hi
 hi
 ```
+
+Note: If you choose to try out the examples in the example folder, you will need to compile them using r++ on your system
+
 <!-- ## Wanna learn more? check out the docs: [Visit docs](https://ritchie.js.org/docs) -->
 
 <!-- <style>

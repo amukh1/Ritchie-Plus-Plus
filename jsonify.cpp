@@ -65,15 +65,16 @@ string stringify(AbstractNode ast) {
   }else if(ast._type == "ASSIGN") {
     ASSIGN assign = ast._ASSIGN;
     out.append("\"name\":\"" + assign._type + "\",");
-    out.append("\"value\":" + assign._value);
+    if(assign._data[0]._LIT._type == "STRING") { out.append("\"value\":" + assign._value ); } else
+    out.append("\"value\":\"" + assign._value + "\"");
   }else if(ast._type == "REFER") {
     REFER refer = ast._REFER;
-    out.append("\"value\":" + refer._value);
+    if(refer._data[0]._LIT._type == "STRING") { out.append("\"value\":" + refer._value); } else
+    out.append("\"value\":\"" + refer._value + "\"");
   }else if(ast._type == "DEREF") {
     DEREF deref = ast._DEREF;
-    out.append("\"type\":\n" + deref._type + "\n,");
-    if(deref._type == "STRING") { out.append("\"value\":" + deref._value + ","); } else
-    out.append("\"value\":" + deref._value);
+    if(deref._data[0]._LIT._type == "STRING") { out.append("\"value\":" + deref._value); } else
+    out.append("\"value\":\"" + deref._value + "\"");
   }
 
 

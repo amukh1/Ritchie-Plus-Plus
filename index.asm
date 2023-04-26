@@ -4,7 +4,6 @@ section .bss
 v: resb 4
 a: resb 4
 b: resb 4
-c: resb 4
 section	.text
         global _start
     _start:
@@ -68,20 +67,6 @@ mov eax, [a]
   mov eax, [b]
   push eax
   mov eax, 2
-  push eax
-  call println
-
-  mov eax, [b]
-  push eax
-  mov eax, 2
-  push eax
-  call println
-
-mov eax, eax
-mov [c], eax
-  mov eax, [c]
-  push eax
-  mov eax, 12
   push eax
   call println
 

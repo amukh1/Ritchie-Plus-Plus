@@ -131,6 +131,18 @@ string DEREF::codegen(string otype, x86* a) {
   return "";
 }
 
+string IE::codegen(string otype, x86* a) {
+  // cout << "heard" << endl;
+  if(_type == "import") {
+    a->add("extern " + _value + "\n");
+  }else {
+    a->add("global " + _value + "\n");
+  }
+  return "";
+}
+
+
+
 string FDECL::codegen(string otype, x86* a) {
   if (false) {
     string code = "\n" + rtype + " " + _value + "(";
@@ -156,6 +168,7 @@ string FDECL::codegen(string otype, x86* a) {
     }
     return code + "\n}";
   } else if (true) {
+    if(_value == "main") a->add("global _start\n    _start:\n call main \n mov eax, 1\n int 0x80");
     a->add("\n" + _value +":\n");
     string code = "";
     for (int i = 0; i < body.size(); i++) {
@@ -174,6 +187,8 @@ string FDECL::codegen(string otype, x86* a) {
         code +=   body[i]._REFER.codegen(otype,a);
       }else if(body[i]._type == "DEREF"){
         code +=   body[i]._DEREF.codegen(otype,a);
+      }else if(body[i]._type == "IE"){
+        code +=   body[i]._IE.codegen(otype,a);
       }
     }
     a->add(code);

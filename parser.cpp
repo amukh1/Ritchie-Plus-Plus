@@ -109,12 +109,21 @@ void Parser::parse() {
       abnode._RET = ret;
       _ast.push_back(abnode);
       i += 2;
-    } else if (_tokens[i][0] == "WORD" && _tokens[i][1] == "import") {
+    } else if (_tokens[i][0] == "WORD" && _tokens[i][1] == "import" && _tokens[i + 1][0] == "STRING") {
+      if(_tokens[i+1][0] == "STRING") {
       IMP imp("IMP", _tokens[i + 1][1], {});
       AbstractNode abnode;
       abnode._type = "IMP";
       abnode._IMP = imp;
       _ast.push_back(abnode);
+      }else {
+        // type is "WORD"
+        EXTERNAL ext("EXTERNAL", _tokens[i+1][1], {});
+        AbstractNode abnode;
+        abnode._type = "EXTERNAL";
+        abnode._EXTERNAL = ext;
+        _ast.push_back(abnode);
+      }
       i += 2;
     } else if(_tokens[i][0] == "WORD" && _tokens[i][1] == "ASM" && _tokens[i+1][0] == "O-BRACE") {
       string asmcode = _tokens[i+2][1];
@@ -178,6 +187,14 @@ void Parser::parse() {
       abnode._DEREF = var;
       _ast.push_back(abnode);
       i+=5;
+    }else if(_tokens[i][0] == "WORD" && _tokens[i][1] == "import" || _tokens[i][1] == "export" && _tokens[i+1][0] == "WORD") {
+      // cout << "here" << endl;
+      IE ie(_tokens[i][1], _tokens[i+1][1], {});
+      AbstractNode abnode;
+      abnode._type = "IE";
+      abnode._IE = ie;
+      _ast.push_back(abnode);
+      i+=2;
     }else {
       // make it a literal
       LITERAL lit(_tokens[i][0], _tokens[i][1], {});

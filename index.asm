@@ -5,10 +5,7 @@ v: resb 4
 a: resb 4
 b: resb 4
 section	.text
-        global _start
-    _start:
- call main 
- call end
+ 
 println: 
 pop edi 
 pop edx 
@@ -41,8 +38,10 @@ ret
 end: 
 mov eax, 1 
 int 0x80 
+global main
+extern println
 
-main:
+main2:
   mov eax, RPP_CONSTANT_0
   push eax
   mov eax, 12

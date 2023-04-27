@@ -1,7 +1,9 @@
 import "stdio";
-import "stdlib";
 
-func main(argc, argv) {
+/* export main;
+import println; */
+
+func main2(argc, argv) {
    println("Hello World!", 12);
    var v = 0;
    var v = "hi";

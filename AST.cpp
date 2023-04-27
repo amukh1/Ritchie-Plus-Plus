@@ -78,6 +78,19 @@ DEREF::DEREF(string type, string value, vector<AbstractNode> data) {
   // body = {};
 }
 
+EXTERNAL::EXTERNAL(string type, string value, vector<AbstractNode> data) {
+  _type = type;
+  _value = value;
+  _data = data;
+  // body = {};
+}
+
+IE::IE(string type, string value, vector<AbstractNode> data) {
+  _type = type;
+  _value = value;
+  _data = data;
+}
+
 void x86::add(string addit) { out.append(addit); }
 
 void x86::sout() { bss.append(out.append(data)); }

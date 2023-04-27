@@ -75,6 +75,10 @@ string stringify(AbstractNode ast) {
     DEREF deref = ast._DEREF;
     if(deref._data[0]._LIT._type == "STRING") { out.append("\"value\":" + deref._value); } else
     out.append("\"value\":\"" + deref._value + "\"");
+  }else if(ast._type == "IE") {
+    IE ie = ast._IE;
+    out.append("\"type\":\"" + ie._type + "\",");
+    out.append("\"value\":\"" + ie._value + "\"");
   }
 
 

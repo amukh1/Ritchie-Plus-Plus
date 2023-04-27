@@ -32,7 +32,7 @@ using namespace std;
 class x86 {
 public:
   string type = "o";
-  string out = "section	.text\n        global _start\n    _start:\n call main \n call end";
+  string out = "section	.text\n ";
   string data = "\nsection .data\n\n NEWLINE db 10\n";
   string bss = "\nsection .bss\n\n";
   vector<string> vars;
@@ -142,6 +142,22 @@ class DEREF : public Node {
   string codegen(string otype, x86* a);
 };
 
+class EXTERNAL : public Node {
+public:
+  EXTERNAL(string type, string value, vector<AbstractNode> data);
+  EXTERNAL() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
+class IE : public Node {
+public:
+  IE(string type, string value, vector<AbstractNode> data);
+  IE() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
 
 // class ExprOpen: public Node {
 // public:
@@ -167,5 +183,7 @@ public:
   ASSIGN _ASSIGN;
   REFER _REFER;
   DEREF _DEREF;
+  EXTERNAL _EXTERNAL;
+  IE _IE;
   AbstractNode() = default;
 };

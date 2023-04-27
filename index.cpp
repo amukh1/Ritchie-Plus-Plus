@@ -79,6 +79,9 @@ int main(int argc, char *argv[]) {
     }else if (parser._ast[i]._type == "ASSIGN") {
       ASSIGN node = parser._ast[i]._ASSIGN;
       cgen.append(node.codegen(to_string(outtyp[1]), assembly));
+    }else if (parser._ast[i]._type == "IE") {
+      IE node = parser._ast[i]._IE;
+      cgen.append(node.codegen(to_string(outtyp[1]), assembly));
     }
   }
   // cout << cgen << endl;

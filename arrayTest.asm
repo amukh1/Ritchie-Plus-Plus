@@ -23,23 +23,23 @@ ret
 _start:
  
     mov WORD [index], 0
-    mov WORD [size], 3
+    mov WORD [size], 4
     mov eax, x
     mov [array + 0*4], eax
     mov eax, y
     mov [array + 1*4], eax
     mov eax, msg
     mov [array + 2*4], eax
-    mov eax, x
+    mov eax, msg2
     mov [array + 3*4], eax
     
     mov eax, 1
     mov [sizes + 0*4], eax
     mov eax, 1
     mov [sizes + 1*4], eax
-    mov eax, 8
+    mov eax, 15
     mov [sizes + 2*4], eax
-    mov eax, 1
+    mov eax, 13
     mov [sizes + 3*4], eax
     
     re:
@@ -117,7 +117,8 @@ _start:
 section .data
     x db '5'
     y db '3'
-    msg db  "sum of x"
+    msg db  "pointer arrays!"
+    msg2 db  "arrays r cool"
     len equ $ - msg
      NEWLINE db 10
 

@@ -1,4 +1,9 @@
+export println;
+export print;
+export end;
+export printstr;
 import "stdio";
+import "stdlib";
 
 func printstr(str) {
 asm("pop edi");

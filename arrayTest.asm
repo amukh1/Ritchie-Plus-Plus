@@ -45,7 +45,7 @@ _start:
     
     mov eax, 5
     mov [array + 0*4], eax
-    mov eax, x
+    mov eax, y
     mov [array + 1*4], eax
     mov eax, y
     mov [array + 2*4], eax
@@ -73,7 +73,7 @@ _start:
     push eax
     call push_back
     
-    mov eax, y
+    mov eax, x
     push eax
     mov eax, 0
     push eax

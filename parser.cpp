@@ -19,7 +19,15 @@ void Parser::parse() {
   for (int i = 0; i < _tokens.size(); i++) {
     // just for testing, kicks n giggles
     // function call
-    if (_tokens[i][0] == "WORD" && _tokens[i + 1][0] == "O-PAREN") {
+    if(_tokens[i][0] == "WORD" && _tokens[i][1] == "ASM" ||  _tokens[i][1] == "asm" && _tokens[i+1][0] == "O-PAREN") {
+      string asmcode = _tokens[i+2][1];
+      ASM asmnode("ASM", asmcode, {});
+      AbstractNode abnode;
+      abnode._type = "ASM";
+      abnode._ASM = asmnode;
+      _ast.push_back(abnode);
+      i+=4;
+    }else if (_tokens[i][0] == "WORD" && _tokens[i + 1][0] == "O-PAREN") {
       // cout << "Function call: " << _tokens[i][1] << "; ";
       string name = _tokens[i][1];
       vector<AbstractNode> args = {};
@@ -125,14 +133,6 @@ void Parser::parse() {
         _ast.push_back(abnode);
       }
       i += 2;
-    } else if(_tokens[i][0] == "WORD" && _tokens[i][1] == "ASM" && _tokens[i+1][0] == "O-BRACE") {
-      string asmcode = _tokens[i+2][1];
-      ASM asmnode("ASM", asmcode, {});
-      AbstractNode abnode;
-      abnode._type = "ASM";
-      abnode._ASM = asmnode;
-      _ast.push_back(abnode);
-      i+=3;
     }else if(_tokens[i][0] == "WORD" && _tokens[i+1][0] == "WORD" && _tokens[i][1] == "var") {
       string name = _tokens[i+1][1];
       string value = _tokens[i+3][1];

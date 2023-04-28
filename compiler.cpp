@@ -107,7 +107,8 @@ string FCALL::codegen(string otype, x86* a) {
 }
 
 string ASM::codegen(string otype, x86* a) {
-  return _value + "\n";
+  a->add(_value.erase(0,1).erase(_value.size()-1, 1) + "\n");
+  return "";
 }
 
 string ASSIGN::codegen(string otype, x86* a) {
@@ -182,7 +183,7 @@ string FDECL::codegen(string otype, x86* a) {
       } else if (body[i]._type == "IMP") {
         code +=   body[i]._IMP.codegen(otype,a);
       }else if(body[i]._type == "ASM"){
-        code +=   body[i]._ASM.codegen(otype,a).erase(0,1).erase(body[i]._ASM.codegen(otype,a).size()-2,1);
+        code +=   body[i]._ASM.codegen(otype,a);
       }else if(body[i]._type == "REFER"){
         code +=   body[i]._REFER.codegen(otype,a);
       }else if(body[i]._type == "DEREF"){

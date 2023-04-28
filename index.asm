@@ -35,13 +35,8 @@ mov eax, 0
 push edi 
 ret
 
-end: 
-mov eax, 1 
-int 0x80 
-global main
-extern println
-
 main2:
+hah
   mov eax, RPP_CONSTANT_0
   push eax
   mov eax, 12

@@ -1,9 +1,7 @@
 import "stdio";
 
-/* export main;
-import println; */
-
 func main2(argc, argv) {
+   asm("mov eax,4");
    println("Hello World!", 12);
    var v = 0;
    var v = "hi";

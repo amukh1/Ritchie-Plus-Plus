@@ -50,7 +50,7 @@ tokens = [
 
 vector<vector<string>> regtok = {
     {"COMMENT", "^\\/\\/.*\\/"},
-    {"MCOMMENT", "^\\/\\*[\\s\\S]*?\\*\\/"}, // 24
+    {"MCOMMENT", "^\\/\\*[\\s\\S]*?\\*\\n"}, // 24
     {"NULL", "^\\s+"}, // 0
     {"SEMI", "^;"},
     {"NUMBER", "^[\\d\\.]+"}, // 2

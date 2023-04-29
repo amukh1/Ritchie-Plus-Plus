@@ -19,7 +19,14 @@ void Parser::parse() {
   for (int i = 0; i < _tokens.size(); i++) {
     // just for testing, kicks n giggles
     // function call
-    if(_tokens[i][0] == "WORD" && _tokens[i][1] == "ASM" ||  _tokens[i][1] == "asm" && _tokens[i+1][0] == "O-PAREN") {
+    if (_tokens.size() == 1) {
+      LITERAL lit(_tokens[i][0], _tokens[i][1], {});
+      AbstractNode abnode;
+      abnode._type = "LITERAL";
+      abnode._LIT = lit;
+      _ast.push_back(abnode);
+      break;
+    }else if(_tokens[i][0] == "WORD" && _tokens[i][1] == "ASM" ||  _tokens[i][1] == "asm" && _tokens[i+1][0] == "O-PAREN") {
       string asmcode = _tokens[i+2][1];
       ASM asmnode("ASM", asmcode, {});
       AbstractNode abnode;
@@ -148,7 +155,7 @@ void Parser::parse() {
       // parse tokens
       Parser par(toks);
       par.parse();
-
+      // cout << par._ast[0]._type << endl;
 
       LITERAL lit(t, value, par._ast);
       AbstractNode abnode1;

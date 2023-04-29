@@ -2,6 +2,7 @@
 section .bss
 
 v: resb 4
+e: resb 4
 a: resb 4
 b: resb 4
 section	.text
@@ -36,7 +37,7 @@ push edi
 ret
 
 main2:
-hah
+mov eax,4
   mov eax, RPP_CONSTANT_0
   push eax
   mov eax, 12
@@ -47,6 +48,8 @@ mov eax, 0
 mov [v], eax
 mov eax, RPP_CONSTANT_1
 mov [v], eax
+mov eax, v
+mov [e], eax
   mov eax, [v]
   push eax
   mov eax, 2

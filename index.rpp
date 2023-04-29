@@ -5,6 +5,7 @@ func main2(argc, argv) {
    println("Hello World!", 12);
    var v = 0;
    var v = "hi";
+   var e = v;
    println(v, 2);
    var& a = v;
    var* b = a;

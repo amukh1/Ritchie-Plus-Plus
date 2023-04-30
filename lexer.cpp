@@ -54,7 +54,7 @@ vector<vector<string>> regtok = {
     {"NULL", "^\\s+"}, // 0
     {"SEMI", "^;"},
     {"NUMBER", "^[\\d\\.]+"}, // 2
-    {"WORD", "^[a-zA-Z][a-zA-Z\\d\\.]*"},
+    {"WORD", "^[a-zA-Z_][_a-zA-Z\\d\\.]*"},
     {"STRING", "^\"[^\"]*\"|^'[^']*'"}, // 4
     {"O-PAREN", "^\\("},
     {"C-PAREN", "^\\)"}, // 6

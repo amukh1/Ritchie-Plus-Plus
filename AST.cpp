@@ -91,6 +91,12 @@ IE::IE(string type, string value, vector<AbstractNode> data) {
   _data = data;
 }
 
+OPP::OPP(string type, string value, vector<AbstractNode> data) {
+  _type = type;
+  _value = value;
+  _data = data;
+}
+
 void x86::add(string addit) { out.append(addit); }
 
 void x86::sout() { bss.append(out.append(data)); }
@@ -110,6 +116,8 @@ string x86::variable(string vtype, string vname, string vvalue) {
     // return "mov eax, " + vvalue + "\nmov [" + vname + "], eax" + "\n";
     if(vtype == "STRING") {
       return "mov eax, " + constant(vtype, vvalue) + "\nmov [" + vname + "], eax" + "\n";
+    }else if(vtype == "WORD") {
+      return "mov eax, [" + vvalue + "]\nmov [" + vname + "], eax" + "\n";
     }else {
       return "mov eax, " + vvalue + "\nmov [" + vname + "], eax" + "\n";
     }

@@ -79,6 +79,18 @@ string stringify(AbstractNode ast) {
     IE ie = ast._IE;
     out.append("\"type\":\"" + ie._type + "\",");
     out.append("\"value\":\"" + ie._value + "\"");
+  }else if(ast._type == "OPP") {
+    OPP opp = ast._OPP;
+    out.append("\"type\":\"" + opp._type + "\",");
+    out.append("\"value\":\"" + opp._value + "\",");
+    out.append("\"operands\":[");
+    for (int i = 0; i < opp._data.size(); i++) {
+      out.append(stringify(opp._data[i]));
+      if(i != opp._data.size() - 1) {
+        out.append(",");
+      }
+    }
+    out.append("]");
   }
 
 

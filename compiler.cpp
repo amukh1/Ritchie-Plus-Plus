@@ -119,6 +119,8 @@ string ASSIGN::codegen(string otype, x86* a) {
       // must be a function call
 
       a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen(otype,a)));
+    }else if(_data[0]._LIT._data[0]._type == "OPP") {
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen(otype,a)));
     }
     return "";
 }
@@ -141,6 +143,15 @@ string IE::codegen(string otype, x86* a) {
     a->add("global " + _value + "\n");
   }
   return "";
+}
+
+string OPP::codegen(string otype, x86* a) {
+  a->add("mov eax, " + _data[0]._LIT._value + "\n");
+  if(_type == "+") a->add("add eax, " + _data[1]._LIT._value + "\n");
+  if(_type == "-") a->add("sub eax, " + _data[1]._LIT._value + "\n");
+  if(_type == "*") a->add("mul eax, " + _data[1]._LIT._value + "\n");
+  if(_type == "/") a->add("div eax, " + _data[1]._LIT._value + "\n");
+  return "eax";
 }
 
 

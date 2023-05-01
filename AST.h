@@ -158,6 +158,15 @@ public:
   string codegen(string otype, x86* a);
 };
 
+class OPP : public Node {
+public:
+  OPP(string type, string value, vector<AbstractNode> data);
+  OPP() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
+
 
 // class ExprOpen: public Node {
 // public:
@@ -185,5 +194,6 @@ public:
   DEREF _DEREF;
   EXTERNAL _EXTERNAL;
   IE _IE;
+  OPP _OPP;
   AbstractNode() = default;
 };

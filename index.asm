@@ -5,6 +5,7 @@ v: resb 4
 e: resb 4
 a: resb 4
 b: resb 4
+c: resb 4
 section	.text
  
 println: 
@@ -48,7 +49,7 @@ mov eax, 0
 mov [v], eax
 mov eax, RPP_CONSTANT_1
 mov [v], eax
-mov eax, v
+mov eax, [v]
 mov [e], eax
   mov eax, [v]
   push eax
@@ -67,6 +68,10 @@ mov eax, [a]
   push eax
   call println
 
+mov eax, 1
+add eax, 2
+mov eax, eax
+mov [c], eax
   mov eax, 0
    ret
 

@@ -10,5 +10,6 @@ func main2(argc, argv) {
    var& a = v;
    var* b = a;
    println(b, 2);
+   var c = 1 + 2;
    return 0;
 };

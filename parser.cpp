@@ -202,6 +202,27 @@ void Parser::parse() {
       abnode._IE = ie;
       _ast.push_back(abnode);
       i+=2;
+    }else if(_tokens[i+1][0] == "OPP"){
+      // operation
+      string op = _tokens[i+1][1];
+      LITERAL A(_tokens[i][0], _tokens[i][1], {});
+      LITERAL B(_tokens[i+2][0], _tokens[i+2][1], {});
+
+      AbstractNode AA;
+      AbstractNode BB;
+
+      AA._type = "LITERAL";
+      AA._LIT = A;
+
+      BB._type = "LITERAL";
+      BB._LIT = B;
+
+      OPP opp(op, "null", {AA, BB});
+      AbstractNode abnode;
+      abnode._type = "OPP";
+      abnode._OPP = opp;
+      _ast.push_back(abnode);
+      i+=2;
     }else {
       // make it a literal
       LITERAL lit(_tokens[i][0], _tokens[i][1], {});

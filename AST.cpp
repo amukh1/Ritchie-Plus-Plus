@@ -107,7 +107,7 @@ string x86::constant(string ctype, string cvalue) {
   return "RPP_CONSTANT_" + to_string(constants - 1);
 }
 
-string x86::variable(string vtype, string vname, string vvalue) {
+string x86::variable(string vtype, string vname, string vvalue, bool variate) {
   // a->constant(_data[i]._LIT.ctype, _data[i]._LIT._value)
   if (!(find(vars.begin(), vars.end(), vname) != vars.end())) {
         vars.push_back(vname);

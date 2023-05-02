@@ -114,13 +114,14 @@ string ASM::codegen(string otype, x86* a) {
 string ASSIGN::codegen(string otype, x86* a) {
   // cout << _data[0]._LIT._data[0]._type << endl;
     if(_data[0]._LIT._data[0]._type == "LITERAL")
-    a->add(a->variable(_data[0]._LIT._type, _type, _value));
+    if(_data[0]._LIT._data[0]._LIT._type != "WORD") a->add(a->variable(_data[0]._LIT._type, _type, _value, false));
+    else a->add(a->variable(_data[0]._LIT._type, _type, _value, true));
     else if(_data[0]._LIT._data[0]._type == "FCALL"){
       // must be a function call
 
-      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen(otype,a)));
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen(otype,a), false));
     }else if(_data[0]._LIT._data[0]._type == "OPP") {
-      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen(otype,a)));
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen(otype,a), false));
     }
     return "";
 }

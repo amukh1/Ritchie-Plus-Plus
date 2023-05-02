@@ -39,7 +39,7 @@ public:
   int constants = 0;
   void add(string addit);
   string constant(string ctype, string cvalue);
-  string variable(string vtype, string vname, string vvalue);
+  string variable(string vtype, string vname, string vvalue, bool variate);
   string point(string vtype, string vname, string vvalue);
   string deref(string vtype, string vname, string vvalue);
   void sout();

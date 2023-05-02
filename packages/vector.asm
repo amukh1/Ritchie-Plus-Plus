@@ -11,8 +11,8 @@ pop edi
 push edi
 ret
 
-global pushback
-pushback:
+global push_back
+push_back:
 pop edi
 pop eax
 pop edx

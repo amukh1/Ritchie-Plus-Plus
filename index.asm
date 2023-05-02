@@ -39,7 +39,7 @@ mov [v], eax
   push eax
   call retr
 
-mov eax, [eax]
+mov eax, eax
 mov [v0], eax
   mov eax, [v0]
   push eax
@@ -59,7 +59,7 @@ mov [v0], eax
   push eax
   call retr
 
-mov eax, [eax]
+mov eax, eax
 mov [v1], eax
   mov eax, [v1]
   push eax

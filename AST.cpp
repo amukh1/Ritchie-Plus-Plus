@@ -116,8 +116,8 @@ string x86::variable(string vtype, string vname, string vvalue) {
     // return "mov eax, " + vvalue + "\nmov [" + vname + "], eax" + "\n";
     if(vtype == "STRING") {
       return "mov eax, " + constant(vtype, vvalue) + "\nmov [" + vname + "], eax" + "\n";
-    }else if(vtype == "WORD") {
-      return "mov eax, [" + vvalue + "]\nmov [" + vname + "], eax" + "\n";
+    // }else if(vtype == "WORD") {
+    //   return "mov eax, [" + vvalue + "]\nmov [" + vname + "], eax" + "\n";
     }else {
       return "mov eax, " + vvalue + "\nmov [" + vname + "], eax" + "\n";
     }

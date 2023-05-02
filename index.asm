@@ -1,82 +1,78 @@
 
 section .bss
 
+vec: resb 4
 v: resb 4
-e: resb 4
-a: resb 4
-b: resb 4
-c: resb 4
+v0: resb 4
+v1: resb 4
 section	.text
- 
-println: 
-pop edi 
-pop edx 
-pop ecx 
-mov ebx, 1 
-mov eax, 4 
-int 0x80 
-
-mov edx, 1 
-mov ecx, NEWLINE 
-mov ebx, 1 
-mov eax, 4 
-int 0x80 
-
-push edi 
-ret 
-
-print: 
-pop edi 
-pop edx 
-pop ecx 
-mov ebx, 1 
-mov eax, 4 
-int 0x80 
-
-mov eax, 0 
-push edi 
-ret
-
-main2:
-mov eax,4
+ extern println
+extern printstr
+extern push_back
+extern set
+extern retr
+global _start
+    _start:
+ call main 
+ mov eax, 1
+ int 0x80
+main:
   mov eax, RPP_CONSTANT_0
   push eax
-  mov eax, 12
+  mov eax, 2
   push eax
-  call println
+  call printstr
 
-mov eax, 0
+mov eax, 2
+mov [vec], eax
+lea eax, vec
 mov [v], eax
-mov eax, RPP_CONSTANT_1
-mov [v], eax
-mov eax, [v]
-mov [e], eax
   mov eax, [v]
   push eax
+  mov eax, RPP_CONSTANT_1
+  push eax
+  call push_back
+
+  mov eax, [v]
+  push eax
+  mov eax, 0
+  push eax
+  call retr
+
+mov eax, [eax]
+mov [v0], eax
+  mov eax, [v0]
+  push eax
   mov eax, 2
   push eax
-  call println
+  call printstr
 
-lea eax, v
-mov [a], eax
-mov eax, [a]
- mov edx, [eax] 
- mov [b], edx
-  mov eax, [b]
+  mov eax, [v]
+  push eax
+  mov eax, RPP_CONSTANT_2
+  push eax
+  call push_back
+
+  mov eax, [v]
+  push eax
+  mov eax, 1
+  push eax
+  call retr
+
+mov eax, [eax]
+mov [v1], eax
+  mov eax, [v1]
   push eax
   mov eax, 2
   push eax
-  call println
+  call printstr
 
-mov eax, 1
-add eax, 2
-mov eax, eax
-mov [c], eax
   mov eax, 0
    ret
 
 section .data
 
  NEWLINE db 10
-RPP_CONSTANT_0 db "Hello World!", 0
-RPP_CONSTANT_1 db "hi", 0
+RPP_CONSTANT_0 db "hi", 0
+RPP_CONSTANT_1 db "ch", 0
+RPP_CONSTANT_2 db "sh", 0

@@ -27,6 +27,15 @@ pop edi
    cld			 ;put DF flag to normal state
    push edi
    ret
+   
+malloc:
+pop edi
+pop edx
+pop eax
+mov [eax], edx
+mov eax, 0
+push edi
+ret
 
 _start:
     mov eax, 4
@@ -37,7 +46,12 @@ _start:
     mov [v], eax ; make v pointer to whatever eax is pointing to
    
    mov edi, msg
-   mov [eax], edi ; put value at pointed address
+;   mov [eax], edi ; put value at pointed address
+    mov ecx, [v]
+    push ecx
+    mov ecx, msg
+    push ecx
+    call malloc
    
    mov ecx, [v]
    mov ebx, [ecx]

@@ -3,20 +3,28 @@ import printstr;
 import push_back;
 import set;
 import retr;
+import alloc;
+import malloc;
 
 func main(argc, argv) {
 	printstr("hi", 2);
-	var vec = 2; 
+	var vec = 2;
 
-	var& v = vec; 
+	var& v = vec;
 
-	push_back(v, "ch");	
+	push_back(v, "ch");
 	var v0 = retr(v, 0);
 	printstr(v0, 2);
 
 	push_back(v, "sh");
 	var v1 = retr(v, 1);
 	printstr(v1, 2);
+
+	var ap = alloc(4);
+	malloc(ap, "hi");
+
+	var* aa = ap;
+	printstr(aa, 2);
 
 	return 0;
 };

@@ -22,3 +22,8 @@ pop edi
    cld
    push edi
    ret
+
+exit:
+   mov	eax, 1
+   xor	ebx, ebx
+   int	80h

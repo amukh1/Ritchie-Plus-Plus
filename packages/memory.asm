@@ -1,5 +1,14 @@
 section .text
 
+global free
+free:
+pop edi
+pop eax
+mov DWORD [eax], 0
+mov eax, 0
+push edi
+ret
+
 global alloc
 alloc:
 pop edi

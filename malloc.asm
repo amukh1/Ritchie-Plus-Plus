@@ -6,6 +6,14 @@ section .text
 
 global _start
 
+free:
+pop edi
+pop eax
+mov DWORD [eax], 0
+mov eax, 0
+push edi
+ret
+
 alloc:
 pop edi
  mov	eax, 45		 ;sys_brk
@@ -62,6 +70,10 @@ _start:
    mov	ebx, 1
    mov	edx, len
    int	80h		 ;print a message
+   
+   mov eax, [v]
+   push eax
+   call free
    
    exit:
    mov	eax, 1

@@ -41,15 +41,6 @@ string stdlib = "\nend: \n\
 mov eax, 1 \n\
 int 0x80 \n";
 
-string RET::codegen(string otype, x86* a) {
-  if (false) {
-    return "return " + _value + ";";
-  } else if (true) {
-    return "  mov eax, " + _value + "\n   ret\n";
-  } else
-    return "";
-}
-
 string IMP::codegen(string otype, x86* a) {
   if (false) {
     return "#include " + _value;
@@ -111,19 +102,38 @@ string ASM::codegen(string otype, x86* a) {
   return "";
 }
 
-string ASSIGN::codegen(string otype, x86* a) {
-  // cout << _data[0]._LIT._data[0]._type << endl;
-    if(_data[0]._LIT._data[0]._type == "LITERAL")
+string EXPR(string ETYPE, x86* a, vector<AbstractNode> _data, string _type, string _value) {
+  if(ETYPE == "VAR") {
+if(_data[0]._LIT._data[0]._type == "LITERAL"){
     if(_data[0]._LIT._data[0]._LIT._type != "WORD") a->add(a->variable(_data[0]._LIT._type, _type, _value, false));
     else a->add(a->variable(_data[0]._LIT._type, _type, _value, true));
-    else if(_data[0]._LIT._data[0]._type == "FCALL"){
+    }else if(_data[0]._LIT._data[0]._type == "FCALL"){
       // must be a function call
 
-      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen(otype,a), false));
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen("o",a), false));
     }else if(_data[0]._LIT._data[0]._type == "OPP") {
-      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen(otype,a), false));
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen("o",a), false));
     }
     return "";
+  }
+  else if(ETYPE == "RETURN") {
+if (false) {
+    return "return " + _value + ";";
+  } else if (true) {
+    return "  mov eax, " + _value + "\n   ret\n";
+  } else
+    return "";
+  }
+
+  else return "";
+}
+
+string RET::codegen(string otype, x86* a) {
+  return EXPR("RETURN", a, _data, _type, _value);
+}
+
+string ASSIGN::codegen(string otype, x86* a) {
+    return EXPR("VAR", a, _data, _type, _value);
 }
 
 string REFER::codegen(string otype, x86* a) {

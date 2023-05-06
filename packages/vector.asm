@@ -1,7 +1,7 @@
 
 section .text
 
-global _start
+;global _start
 global retr
 
 global vector
@@ -18,6 +18,8 @@ pop eax
 pop edx
 mov ebx, [edx]
 mov [edx + 4*(ebx)], eax
+add ebx, 1
+mov [edx], ebx
 push edi
 ret
 

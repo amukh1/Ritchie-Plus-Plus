@@ -69,6 +69,7 @@ vector<vector<string>> regtok = {
     {"DECLARATION", "^="},
     {"EQUALITY", "^=="}, // 16
     {"COMMA", "^,"},
+    {"OPP", "^\\->"}, // 18
     {"OPP", "^\\+"}, // 18
     {"OPP", "^-"},
     {"STAR", "^\\*"}, // 20

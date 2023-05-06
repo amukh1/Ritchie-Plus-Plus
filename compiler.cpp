@@ -150,8 +150,10 @@ string OPP::codegen(string otype, x86* a) {
   a->add("mov eax, " + _data[0]._LIT._value + "\n");
   if(_type == "+") a->add("add eax, " + _data[1]._LIT._value + "\n");
   if(_type == "-") a->add("sub eax, " + _data[1]._LIT._value + "\n");
-  if(_type == "*") a->add("mul eax, " + _data[1]._LIT._value + "\n");
-  if(_type == "/") a->add("div eax, " + _data[1]._LIT._value + "\n");
+  // if(_type == "*") a->add("imul eax, " + _data[1]._LIT._value + "\n");
+  // if(_type == "/") a->add("div eax, " + _data[1]._LIT._value + "\n");
+  // if(_type == "%") a->add("mod eax, " + _data[1]._LIT._value + "\n");
+  // if(_type == "->") ...;
   return "eax";
 }
 

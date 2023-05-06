@@ -111,7 +111,7 @@ void Parser::parse() {
       abnode._type = "FDECL";
       abnode._FD = fdecl;
       _ast.push_back(abnode);
-      i+=2;
+      i++;
       // par.out("par.ast");
 
       // cout << "Parsed an FDECL Node" << endl;

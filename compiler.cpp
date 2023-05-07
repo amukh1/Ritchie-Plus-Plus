@@ -127,6 +127,8 @@ if(_data[0]._LIT._data[0]._type == "LITERAL"){
     }else if(_data[0]._type == "FCALL") {
       // must be a function call
       return _data[0]._FC.codegen("o",a);
+    }else if(_data[0]._type == "OPP") {
+      return _data[0]._OPP.codegen("o",a);
     }else return "";
   }
 

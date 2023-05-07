@@ -26,5 +26,5 @@ func main(argc, argv) {
 	var* aa = ap;
 	printstr(aa, 2);
 
-	return "yo";
+	return 0;
 };

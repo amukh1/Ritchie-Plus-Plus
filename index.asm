@@ -92,8 +92,8 @@ mov eax, [ap]
   push eax
   call printstr
 
-  mov eax, 0
-   ret
+mov eax, RPP_CONSTANT_4
+  ret
 
 section .data
 
@@ -102,3 +102,4 @@ RPP_CONSTANT_0 db "hi", 0
 RPP_CONSTANT_1 db "ch", 0
 RPP_CONSTANT_2 db "sh", 0
 RPP_CONSTANT_3 db "hi", 0
+RPP_CONSTANT_4 db "yo", 0

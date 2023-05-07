@@ -117,19 +117,25 @@ if(_data[0]._LIT._data[0]._type == "LITERAL"){
     return "";
   }
   else if(ETYPE == "RETURN") {
-if (false) {
-    return "return " + _value + ";";
-  } else if (true) {
-    return "  mov eax, " + _value + "\n   ret\n";
-  } else
-    return "";
+    // cout << _data[0]._LIT._value << endl;
+    if(_data[0]._type == "LITERAL"){
+      if(_data[0]._LIT._type == "STRING")
+      return a->constant(_data[0]._LIT._type, _data[0]._LIT._value);
+      else if(_data[0]._LIT._type == "WORD" || _data[0]._LIT._type == "NUMBER")
+      return _data[0]._LIT._value;
+      else return "";
+    }else if(_data[0]._type == "FCALL") {
+      // must be a function call
+      return _data[0]._FC.codegen("o",a);
+    }else return "";
   }
 
   else return "";
 }
 
 string RET::codegen(string otype, x86* a) {
-  return EXPR("RETURN", a, _data, _type, _value);
+  a->add("mov eax, " + EXPR("RETURN", a, _data, _type, _value) + "\n  ret\n");
+  return "";
 }
 
 string ASSIGN::codegen(string otype, x86* a) {

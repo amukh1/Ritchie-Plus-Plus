@@ -116,14 +116,29 @@ void Parser::parse() {
 
       // cout << "Parsed an FDECL Node" << endl;
     } else if (_tokens[i][0] == "WORD" && _tokens[i][1] == "return") {
-      RET ret("RET", _tokens[i + 1][1], {});
+
+      vector<vector<string>> toks = {};
+      i++;
+      while(_tokens[i][0] != "SEMI") {
+        toks.push_back(_tokens[i]);
+        i++;
+      }
+      // parse tokens
+      Parser par(toks);
+      par.parse();
+
+      // AbstractNode ab1;
+      // ab1._type = "LITERAL";
+      // LITERAL lit(_tokens[i + 1][0], _tokens[i + 1][1], {});
+      // ab1._LIT = lit;
+      RET ret("RET", "\"none\"", par._ast);
       // ret.ctype = _tokens[i + 1][1];
       ret.ctype = "DROPPED SUPPORT FOR C";
       AbstractNode abnode;
       abnode._type = "RET";
       abnode._RET = ret;
       _ast.push_back(abnode);
-      i += 2;
+      // i += 2;
     } else if (_tokens[i][0] == "WORD" && _tokens[i][1] == "import" && _tokens[i + 1][0] == "STRING") {
       if(_tokens[i+1][0] == "STRING") {
       IMP imp("IMP", _tokens[i + 1][1], {});

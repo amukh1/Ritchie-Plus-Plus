@@ -52,7 +52,9 @@ if(_data[0]._LIT._data[0]._type == "LITERAL"){
       a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen("o",a), false));
     }else if(_data[0]._LIT._data[0]._type == "OPP") {
       a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen("o",a), false));
-    }
+    }else if(_data[0]._LIT._data[0]._type == "PNTR") {
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._PNTR.codegen("o",a), false));
+    }else 
     return "";
   }
   else if(ETYPE == "RETURN") {

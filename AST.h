@@ -166,6 +166,14 @@ public:
   string codegen(string otype, x86* a);
 };
 
+class PNTR : public Node {
+public:
+  PNTR(string type, string value, vector<AbstractNode> data);
+  PNTR() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
 
 
 // class ExprOpen: public Node {
@@ -195,5 +203,6 @@ public:
   EXTERNAL _EXTERNAL;
   IE _IE;
   OPP _OPP;
+  PNTR _PNTR;
   AbstractNode() = default;
 };

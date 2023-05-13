@@ -86,7 +86,7 @@ mov eax, RPP_CONSTANT_3
 mov eax, [ap]
  mov edx, [eax] 
  mov [aa], edx
-mov eax, [aa]
+mov eax, 
   push eax
 mov eax, 2
   push eax

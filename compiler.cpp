@@ -182,6 +182,18 @@ string OPP::codegen(string otype, x86* a) {
   return "eax";
 }
 
+string PNTR::codegen(string otype, x86* a) {
+  if(_type == "REF") {
+    a->add("lea eax, " + _value + "\n");
+    return "eax";
+  }else if(_type == "DEREF") {
+    a->add("mov ebx, [" + _value + "]\n");
+    a->add("mov eax, [ebx]\n");
+    return "eax";
+  }else
+  return "";
+}
+
 
 
 string FDECL::codegen(string otype, x86* a) {

@@ -24,7 +24,7 @@ func main(argc, argv) {
 	malloc(ap, "hi");
 
 	var* aa = ap;
-	printstr(aa, 2);
+	printstr(*ap, 2);
 
 	return 0;
 };

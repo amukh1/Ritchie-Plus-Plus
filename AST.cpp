@@ -97,6 +97,12 @@ OPP::OPP(string type, string value, vector<AbstractNode> data) {
   _data = data;
 }
 
+PNTR::PNTR(string type, string value, vector<AbstractNode> data) {
+  _type = type;
+  _value = value;
+  _data = data;
+}
+
 void x86::add(string addit) { out.append(addit); }
 
 void x86::sout() { bss.append(out.append(data)); }

@@ -92,6 +92,9 @@ string stringify(AbstractNode ast) {
       }
     }
     out.append("]");
+  }else if(ast._type == "PNTR") {
+    out.append("\"type\":\"" + ast._PNTR._type + "\",");
+    out.append("\"value\":\"" + ast._PNTR._value + "\"");
   }
 
 

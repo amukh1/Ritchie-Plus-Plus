@@ -103,8 +103,9 @@ void Parser::parse() {
       node2._FC = fcall2;
       _ast.push_back(node2);
 
-      if(_tokens[i][0] == "SEMI")
-      i--;
+      if(_tokens[i][0] == "SEMI") i--;
+
+      i++;
       // cout << "Parsed an FCALL Node" << endl;
     }
     // function declaration + definition
@@ -283,6 +284,20 @@ void Parser::parse() {
       abnode._OPP = opp;
       _ast.push_back(abnode);
       i+=2;
+    }else if(_tokens[i][0] == "STAR") {
+      PNTR pntr = PNTR("DEREF", _tokens[i+1][1], {});
+      AbstractNode abnode;
+      abnode._type = "PNTR";
+      abnode._PNTR = pntr;
+      _ast.push_back(abnode);
+      i++;
+    }else if(_tokens[i][0] == "AMP") {
+      PNTR pntr = PNTR("REF", _tokens[i+1][1], {});
+      AbstractNode abnode;
+      abnode._type = "PNTR";
+      abnode._PNTR = pntr;
+      _ast.push_back(abnode);
+      i++;
     }else {
       // make it a literal
       LITERAL lit(_tokens[i][0], _tokens[i][1], {});

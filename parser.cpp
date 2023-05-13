@@ -77,6 +77,7 @@ void Parser::parse() {
         args.push_back(abnode);
         i++;
       }
+      i = j;
       FCALL fcall("FCALL", name, args);
       AbstractNode node;
       node._type = "FCALL";

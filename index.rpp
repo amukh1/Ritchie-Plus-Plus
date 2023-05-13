@@ -7,7 +7,7 @@ import alloc;
 import malloc;
 
 func main(argc, argv) {
-	printstr(printf(e);, 2);
+	printstr("hi", 2);
 	var vec = 2;
 
 	var& v = vec;

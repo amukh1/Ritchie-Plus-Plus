@@ -60,8 +60,10 @@ if(_data[0]._LIT._data[0]._type == "LITERAL"){
     if(_data[0]._type == "LITERAL"){
       if(_data[0]._LIT._type == "STRING")
       return a->constant(_data[0]._LIT._type, _data[0]._LIT._value);
-      else if(_data[0]._LIT._type == "WORD" || _data[0]._LIT._type == "NUMBER")
+      else if( _data[0]._LIT._type == "NUMBER")
       return _data[0]._LIT._value;
+      else if(_data[0]._LIT._type == "WORD")
+      return "[" + _data[0]._LIT._value + "]";
       else return "";
     }else if(_data[0]._type == "FCALL") {
       // must be a function call

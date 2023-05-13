@@ -29,6 +29,7 @@ string stringify(AbstractNode ast) {
   }else if(ast._type == "FCALL") {
     FCALL node = ast._FC;
     // cout << node._value << endl;
+    out.append("\"_ftype\":\"" + node._type + "\",");
     out.append("\"_value\":\"" + node._value + "\",");
     out.append("\"_data\":[");
     for (int i = 0; i < node._data.size(); i++) {

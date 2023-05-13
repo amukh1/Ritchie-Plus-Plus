@@ -38,7 +38,30 @@ void Parser::parse() {
       // cout << "Function call: " << _tokens[i][1] << "; ";
       string name = _tokens[i][1];
       vector<AbstractNode> args = {};
+      vector<vector<vector<string>>> pms = {{}};
+      vector<vector<string>> pm = {};
       i += 2;
+      int j = i;
+      int prn = 0;
+      int opens = 1;
+      // cout << "entering loop";
+      while (opens > 0) {
+        // cout << opens << endl;
+        // cout << _tokens[j][0] << endl;
+        if (_tokens[j][0] == "C-PAREN")
+        {opens--; if(opens == 0) break;}
+        if (_tokens[j][0] == "O-PAREN") {
+          opens++;
+        }
+        if(opens == 1 && _tokens[j][0] == "COMMA") { prn++; j++; pms.push_back({}); continue; }
+        // pm.push_back(_tokens[i]);
+        // cout << prn << endl;
+        pms[prn].push_back(_tokens[j]);
+        // cout << "insert confusion" << endl;
+        j++;
+      }
+      // cout << "exiting loop" << endl;
+
       while (_tokens[i][0] != "C-PAREN") {
         if (_tokens[i][0] == "COMMA") {
           i++;
@@ -58,7 +81,27 @@ void Parser::parse() {
       AbstractNode node;
       node._type = "FCALL";
       node._FC = fcall;
-      _ast.push_back(node);
+      // _ast.push_back(node);
+
+      vector<AbstractNode> pms2 = {};
+
+      // cout << pms.size() << endl;
+      for(int q = 0; q < pms.size(); q++){
+        Parser parm(pms[q]);
+        // cout << q << endl;
+        // cout << pms[q].size() << endl;
+        // cout << pms[q][0][1] << endl;
+        parm.parse();
+        // cout << "passee" << endl;
+        pms2.push_back(parm._ast[0]);
+      }
+
+      FCALL fcall2("NFCALL", name, pms2);
+      AbstractNode node2;
+      node2._type = "FCALL";
+      node2._FC = fcall2;
+      _ast.push_back(node2);
+
       i++;
       // cout << "Parsed an FCALL Node" << endl;
     }

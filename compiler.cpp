@@ -70,6 +70,8 @@ if(_data[0]._LIT._data[0]._type == "LITERAL"){
       return _data[0]._FC.codegen("o",a);
     }else if(_data[0]._type == "OPP") {
       return _data[0]._OPP.codegen("o",a);
+    }else if(_data[0]._type == "PNTR") {
+      return _data[0]._PNTR.codegen("o",a);
     }else return "";
   }
 

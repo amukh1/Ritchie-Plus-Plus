@@ -103,7 +103,8 @@ void Parser::parse() {
       node2._FC = fcall2;
       _ast.push_back(node2);
 
-      i++;
+      if(_tokens[i][0] == "SEMI")
+      i--;
       // cout << "Parsed an FCALL Node" << endl;
     }
     // function declaration + definition

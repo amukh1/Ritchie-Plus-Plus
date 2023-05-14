@@ -54,8 +54,7 @@ if(_data[0]._LIT._data[0]._type == "LITERAL"){
       a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen("o",a), false));
     }else if(_data[0]._LIT._data[0]._type == "PNTR") {
       a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._PNTR.codegen("o",a), false));
-    }else 
-    return "";
+    }else return "";
   }
   else if(ETYPE == "RETURN") {
     // cout << _data[0]._LIT._value << endl;
@@ -75,9 +74,8 @@ if(_data[0]._LIT._data[0]._type == "LITERAL"){
     }else if(_data[0]._type == "PNTR") {
       return _data[0]._PNTR.codegen("o",a);
     }else return "";
-  }
-
-  else return "";
+  }else return "";
+  return "";
 }
 
 string IMP::codegen(string otype, x86* a) {

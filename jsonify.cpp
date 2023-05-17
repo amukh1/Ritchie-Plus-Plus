@@ -95,6 +95,12 @@ string stringify(AbstractNode ast) {
   }else if(ast._type == "PNTR") {
     out.append("\"type\":\"" + ast._PNTR._type + "\",");
     out.append("\"value\":\"" + ast._PNTR._value + "\"");
+  }else if(ast._type == "LCLASS") {
+    out.append("\"type\":\"" + ast._LCLASS._type + "\",");
+    out.append("\"value\":\"" + ast._LCLASS._value + "\"");
+  }else if(ast._type == "LCLDEF") {
+    out.append("\"type\":\"" + ast._LCLDEF._type + "\",");
+    out.append("\"value\":\"" + ast._LCLDEF._value + "\"");
   }
 
 

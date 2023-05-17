@@ -39,7 +39,7 @@ public:
   int constants = 0;
   void add(string addit);
   string constant(string ctype, string cvalue);
-  string variable(string vtype, string vname, string vvalue, bool variate);
+  string variable(string vtype, string vname, string vvalue, bool variate, bool islcl);
   string point(string vtype, string vname, string vvalue);
   string deref(string vtype, string vname, string vvalue);
   void sout();
@@ -174,6 +174,24 @@ public:
   string codegen(string otype, x86* a);
 };
 
+class LCLASS : public Node {
+public:
+  LCLASS(string type, string value, vector<AbstractNode> data);
+  LCLASS() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
+class LCLDEF : public Node {
+public:
+  LCLDEF(string type, string value, vector<AbstractNode> data);
+  LCLDEF() = default;
+  // ~FCALL();
+  string codegen(string otype, x86* a);
+};
+
+
+
 
 
 // class ExprOpen: public Node {
@@ -204,5 +222,7 @@ public:
   IE _IE;
   OPP _OPP;
   PNTR _PNTR;
+  LCLASS _LCLASS;
+  LCLDEF _LCLDEF;
   AbstractNode() = default;
 };

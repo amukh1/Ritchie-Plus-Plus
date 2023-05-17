@@ -23,8 +23,14 @@ func main(argc, argv) {
 	var ap = alloc(4);
 	malloc(ap, "hi");
 
-	var* aa = ap;
 	printstr(*ap, 2);
+
+	bind aa ap;
+	let aa = "js";
+
+	printstr(aa, 2);
+	printstr(*ap, 2);
+
 
 	return 0;
 };

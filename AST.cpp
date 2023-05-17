@@ -103,6 +103,18 @@ PNTR::PNTR(string type, string value, vector<AbstractNode> data) {
   _data = data;
 }
 
+LCLASS::LCLASS(string type, string value, vector<AbstractNode> data) {
+  _type = type;
+  _value = value;
+  _data = data;
+}
+
+LCLDEF::LCLDEF(string type, string value, vector<AbstractNode> data) {
+  _type = type;
+  _value = value;
+  _data = data;
+}
+
 void x86::add(string addit) { out.append(addit); }
 
 void x86::sout() { bss.append(out.append(data)); }
@@ -113,9 +125,9 @@ string x86::constant(string ctype, string cvalue) {
   return "RPP_CONSTANT_" + to_string(constants - 1);
 }
 
-string x86::variable(string vtype, string vname, string vvalue, bool variate) {
+string x86::variable(string vtype, string vname, string vvalue, bool variate, bool islcl) {
   // a->constant(_data[i]._LIT.ctype, _data[i]._LIT._value)
-  if (!(find(vars.begin(), vars.end(), vname) != vars.end())) {
+  if ((!(find(vars.begin(), vars.end(), vname) != vars.end())) && islcl == false) {
         vars.push_back(vname);
         bss.append(vname + ": resb 4\n");
     }

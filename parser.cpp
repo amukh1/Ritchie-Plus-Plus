@@ -229,6 +229,41 @@ void Parser::parse() {
       _ast.push_back(abnode);
       // cout << oli - i << endl;
       // i+=4;
+    }else if(_tokens[i][0] == "WORD" && _tokens[i+1][0] == "WORD" && _tokens[i][1] == "let") {
+      string name = _tokens[i+1][1];
+      string value = _tokens[i+3][1];
+      string t = _tokens[i+3][0];
+      // int oli = i;
+
+      vector<vector<string>> toks = {};
+      i+=3;
+      while(_tokens[i][0] != "SEMI") {
+        toks.push_back(_tokens[i]);
+        i++;
+      }
+      // parse tokens
+      Parser par(toks);
+      par.parse();
+      // cout << par._ast[0]._type << endl;
+
+      LITERAL lit(t, value, par._ast);
+      AbstractNode abnode1;
+      abnode1._type = "LITERAL";
+      abnode1._LIT = lit;
+      LCLASS var(name, value, {abnode1});
+      AbstractNode abnode;
+      abnode._type = "LCLASS";
+      abnode._LCLASS = var;
+      _ast.push_back(abnode);
+      // cout << oli - i << endl;
+      // i+=4;
+    }else if(_tokens[i][0] == "WORD" && _tokens[i+1][0] == "WORD" && _tokens[i][1] == "bind") {
+      LCLDEF node(_tokens[i+1][1], _tokens[i+2][1], {});
+      AbstractNode abnode;
+      abnode._type = "LCLDEF";
+      abnode._LCLDEF = node;
+      _ast.push_back(abnode);
+      i+=3;
     }else if(_tokens[i][0] == "WORD" && _tokens[i+2][0] == "WORD" && _tokens[i][1] == "var" && _tokens[i+1][0] == "AMP") {
       string name = _tokens[i+2][1];
       string value = _tokens[i+4][1];

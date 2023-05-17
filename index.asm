@@ -6,7 +6,6 @@ v: resb 4
 v0: resb 4
 v1: resb 4
 ap: resb 4
-aa: resb 4
 section	.text
  extern println
 extern printstr
@@ -83,9 +82,6 @@ mov eax, RPP_CONSTANT_3
   push eax
   call malloc
 
-mov eax, [ap]
- mov edx, [eax] 
- mov [aa], edx
 mov ebx, [ap]
 mov eax, [ebx]
 mov eax, eax
@@ -94,6 +90,9 @@ mov eax, 2
   push eax
   call printstr
 
+%define aa ap
+mov eax, 4
+mov [aa], eax
 mov eax, 0
   ret
 

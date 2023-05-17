@@ -44,16 +44,16 @@ int 0x80 \n";
 string EXPR(string ETYPE, x86* a, vector<AbstractNode> _data, string _type, string _value) {
   if(ETYPE == "VAR") {
 if(_data[0]._LIT._data[0]._type == "LITERAL"){
-    if(_data[0]._LIT._data[0]._LIT._type != "WORD") a->add(a->variable(_data[0]._LIT._type, _type, _value, false));
-    else a->add(a->variable(_data[0]._LIT._type, _type, _value, true));
+    if(_data[0]._LIT._data[0]._LIT._type != "WORD") a->add(a->variable(_data[0]._LIT._type, _type, _value, false, false));
+    else a->add(a->variable(_data[0]._LIT._type, _type, _value, true, false));
     }else if(_data[0]._LIT._data[0]._type == "FCALL"){
       // must be a function call
 
-      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen("o",a), false));
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen("o",a), false, false));
     }else if(_data[0]._LIT._data[0]._type == "OPP") {
-      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen("o",a), false));
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen("o",a), false, false));
     }else if(_data[0]._LIT._data[0]._type == "PNTR") {
-      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._PNTR.codegen("o",a), false));
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._PNTR.codegen("o",a), false, false));
     }else return "";
   }
   else if(ETYPE == "RETURN") {
@@ -153,6 +153,27 @@ string ASSIGN::codegen(string otype, x86* a) {
     return EXPR("VAR", a, _data, _type, _value);
 }
 
+string LCLASS::codegen(string otype, x86* a) {
+    if(_data[0]._LIT._data[0]._type == "LITERAL"){
+    if(_data[0]._LIT._data[0]._LIT._type != "WORD") a->add(a->variable(_data[0]._LIT._type, _type, _value, false, true));
+    else a->add(a->variable(_data[0]._LIT._type, _type, _value, true, true));
+    }else if(_data[0]._LIT._data[0]._type == "FCALL"){
+      // must be a function call
+
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._FC.codegen("o",a), false, true));
+    }else if(_data[0]._LIT._data[0]._type == "OPP") {
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._OPP.codegen("o",a), false, true));
+    }else if(_data[0]._LIT._data[0]._type == "PNTR") {
+      a->add(a->variable(_data[0]._LIT._type, _type, _data[0]._LIT._data[0]._PNTR.codegen("o",a), false, true));
+    }else return "";
+    return "";
+}
+
+string LCLDEF::codegen(string otype, x86* a) {
+    a->add("\%define " + _type + " " + _value + "\n");
+    return "";
+}
+
 string REFER::codegen(string otype, x86* a) {
   a->add(a->point(_data[0]._LIT._type, _type, _value));
   return "";
@@ -244,6 +265,14 @@ string FDECL::codegen(string otype, x86* a) {
         code +=   body[i]._DEREF.codegen(otype,a);
       }else if(body[i]._type == "IE"){
         code +=   body[i]._IE.codegen(otype,a);
+      }else if(body[i]._type == "LCLDEF"){
+        code +=   body[i]._LCLDEF.codegen(otype,a);
+      }else if(body[i]._type == "OPP"){
+        code +=   body[i]._OPP.codegen(otype,a);
+      }else if(body[i]._type == "PNTR"){
+        code +=   body[i]._PNTR.codegen(otype,a);
+      }else if(body[i]._type == "LCLASS"){
+        code +=   body[i]._LCLASS.codegen(otype,a);
       }
     }
     a->add(code);
